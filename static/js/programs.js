@@ -56,3 +56,84 @@ const PROGRAMS = [
     "download_count": 315
   }
 ];
+
+// Функция для парсинга ссылки на GitHub Release
+function parseGithubReleaseUrl(url) {
+  if (!url || !url.includes('github.com') || !url.includes('/releases/')) return null;
+  try {
+    const cleanUrl = url.replace('https://github.com/', '');
+    const parts = cleanUrl.split('/');
+    const owner = parts[0];
+    const repo = parts[1];
+    const filename = url.substring(url.lastIndexOf('/') + 1);
+    return { owner, repo, filename };
+  } catch (e) {
+    return null;
+  }
+}
+
+// Функция для получения реального счетчика скачиваний с GitHub API
+async function fetchGithubDownloadCount(owner, repo, filename) {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
+    if (!response.ok) return null;
+    const releases = await response.json();
+    let count = 0;
+    releases.forEach(release => {
+      if (release.assets) {
+        release.assets.forEach(asset => {
+          if (asset.name === filename) {
+            count += asset.download_count;
+          }
+        });
+      }
+    });
+    return count;
+  } catch (e) {
+    console.error('Ошибка получения статистики с GitHub API:', e);
+    return null;
+  }
+}
+
+// Функция обновления счетчиков на странице
+async function updateDownloadCounters() {
+  const catalogCounters = document.querySelectorAll('.download-counter');
+  const detailCounter = document.getElementById('detail-download-counter');
+  const cache = {};
+
+  const getCount = async (program) => {
+    const ghInfo = parseGithubReleaseUrl(program.link);
+    if (!ghInfo) return program.download_count;
+
+    const cacheKey = `${ghInfo.owner}/${ghInfo.repo}/${ghInfo.filename}`;
+    if (cache[cacheKey] !== undefined) return cache[cacheKey];
+
+    const count = await fetchGithubDownloadCount(ghInfo.owner, ghInfo.repo, ghInfo.filename);
+    if (count !== null) {
+      cache[cacheKey] = count;
+      return count;
+    }
+    return program.download_count;
+  };
+
+  // Обновляем счетчики в каталоге
+  for (const counterEl of catalogCounters) {
+    const programId = parseInt(counterEl.getAttribute('data-program-id'));
+    const program = PROGRAMS.find(p => p.id === programId);
+    if (program) {
+      const realCount = await getCount(program);
+      counterEl.textContent = realCount;
+    }
+  }
+
+  // Обновляем счетчик на странице деталей
+  if (detailCounter) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const programId = parseInt(urlParams.get('id'));
+    const program = PROGRAMS.find(p => p.id === programId);
+    if (program) {
+      const realCount = await getCount(program);
+      detailCounter.textContent = realCount;
+    }
+  }
+}

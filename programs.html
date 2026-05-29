@@ -134,7 +134,7 @@
                                 <span class="badge" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-secondary);">${p.category}</span>
                                 <span style="font-size: 0.75rem; color: var(--text-secondary); display: flex; align-items: center; gap: 4px; margin-top: 2px;" title="Количество скачиваний">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                    ${p.download_count}
+                                    <span class="download-counter" data-program-id="${p.id}">${p.download_count}</span>
                                 </span>
                             </div>
                         </div>
@@ -146,6 +146,9 @@
                 `;
                 grid.appendChild(card);
             });
+
+            // Обновляем счетчики скачиваний
+            updateDownloadCounters();
 
             // Инициализируем фильтрацию
             const filterButtons = document.querySelectorAll('.filter-btn');
