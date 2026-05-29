@@ -27,21 +27,33 @@ const PROGRAMS = [
   },
   {
     "id": 2,
-    "name": "KirDev Cleaner",
-    "description": "Легковесная утилита для быстрой очистки системы от временных файлов и кэша.",
-    "full_description": "В отличие от других клинеров, KirDev Cleaner не загружает систему фоновыми процессами и не показывает рекламу. Это кристально чистая утилита, которая делает ровно то, что заявлено — освобождает гигабайты места на жестком диске за пару кликов.",
+    "name": "Kiro Bot",
+    "description": "Профессиональный автономный чат-бот для ВКонтакте на Android.",
+    "full_description": "Kiro Bot — это мощное решение для автоматизации общения в сообществах и профилях ВК. Благодаря продвинутому движку BotBrain 2.0, бот умеет не просто отвечать на вопросы, но и понимать контекст, работать с вложениями и обеспечивать безопасность вашего чата.",
     "features": [
-      "Удаление системного мусора и кэша браузеров.",
-      "Весит меньше 5 МБ и работает моментально.",
-      "Не требует установки (Portable версия).",
-      "Открытый алгоритм очистки."
+      "🧠 Интеллектуальный поиск (BotBrain v2.1.8): 6 уровней приоритета, Regex-выражения, Fuzzy Search (опечатки), точные совпадения, контекст и динамические переменные.",
+      "👥 Мультиаккаунтность: Одновременное управление до 5 ботами (как в сообществах ВК, так и в личных профилях).",
+      "📎 Вложения: Поддержка голосовых сообщений, фото, видео, документов и граффити с сценариями ответов.",
+      "🛡️ Защита: Встроенный черный список пользователей для предотвращения спама и троллинга.",
+      "⚙️ Управление: Удобный редактор правил, живой лог событий с подсветкой, детальная статистика и дизайн Material 3 с темной темой."
     ],
-    "screenshots": ["static/screenshots/cleaner_1.jpg"],
-    "version": "2.0.1",
-    "link": "kirdev_cleaner.zip",
-    "cover_image": "static/covers/cleaner_cover.jpg",
-    "category": "ПК",
-    "download_count": 89
+    "screenshots": [
+      "static/images/Kiro_Bot/main.jpg",
+      "static/images/Kiro_Bot/2.jpg",
+      "static/images/Kiro_Bot/3.jpg",
+      "static/images/Kiro_Bot/4.jpg",
+      "static/images/Kiro_Bot/5.jpg",
+      "static/images/Kiro_Bot/6.jpg",
+      "static/images/Kiro_Bot/7.jpg",
+      "static/images/Kiro_Bot/8.jpg",
+      "static/images/Kiro_Bot/9.jpg",
+      "static/images/Kiro_Bot/10.jpg"
+    ],
+    "version": "2.0.0",
+    "link": "https://github.com/kirya07kz/Kiro-BOT-VK-2.00/releases/download/v2.00/app-release.apk",
+    "cover_image": "static/images/Kiro_Bot/main.jpg",
+    "category": "Android",
+    "download_count": 315
   },
   {
     "id": 3,
