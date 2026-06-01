@@ -55,6 +55,54 @@
             </div>
         </section>
         
+
+        <!-- Stats Section -->
+        <section class="section-padding" style="border-top: 1px solid var(--border-color); background: rgba(255,255,255,0.02);">
+            <div class="container">
+                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; text-align: center;">
+                    <div class="stat-card" style="padding: 24px;">
+                        <h3 class="stat-number" data-target="2" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">0</h3>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem;">Разработано программ</p>
+                    </div>
+                    <div class="stat-card" style="padding: 24px;">
+                        <h3 class="stat-number" id="total-downloads-stat" data-target="533" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">0</h3>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem;">Общих скачиваний</p>
+                    </div>
+                    <div class="stat-card" style="padding: 24px;">
+                        <h3 class="stat-number" data-target="1337" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">0</h3>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem;">Строк кода написано</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Featured Program Section -->
+        <section class="section-padding" style="border-top: 1px solid var(--border-color);">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+                    <div>
+                        <h2 class="section-title" style="margin-bottom: 8px;">Последний релиз</h2>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem;">Самая свежая разработка студии</p>
+                    </div>
+                    <a href="programs.html" class="btn-secondary" style="display: none; @media (min-width: 768px) { display: flex; }">Все программы &rarr;</a>
+                </div>
+
+                <div class="featured-card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: var(--glass-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; align-items: center;">
+                    <div style="padding: 40px;">
+                        <span class="badge" style="background: rgba(36, 161, 222, 0.2); color: #24A1DE; border: 1px solid rgba(36, 161, 222, 0.3); margin-bottom: 16px; display: inline-block;">Обновлено недавно</span>
+                        <h3 style="font-size: 2rem; font-weight: 800; margin-bottom: 16px;">Kiro Bot</h3>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 32px;">
+                            Профессиональный автономный чат-бот для ВКонтакте на Android. Интеллектуальный поиск, поддержка вложений и защита чатов.
+                        </p>
+                        <a href="program_detail.html?id=2" class="btn-primary lg">Смотреть детали</a>
+                    </div>
+                    <div class="featured-image" style="height: 100%; min-height: 300px; background: url('static/images/Kiro_Bot/main.jpg') center/cover;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="directions" class="section-padding" style="border-top: 1px solid var(--border-color);">
             <div class="container">
                 <h2 class="section-title" style="text-align: center; margin-bottom: 12px;">Что мы пишем</h2>
@@ -233,6 +281,114 @@
                     });
                 });
             }
+        });
+    </script>
+
+
+    <!-- Подключаем базу программ для подсчета скачиваний -->
+    <script src="static/js/programs.js?v=2.1"></script>
+    <script>
+        // Анимация счетчиков
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target + (target > 500 ? '+' : '');
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // Запуск анимации счетчиков при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-grid');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Динамический подсчет скачиваний
+        document.addEventListener('DOMContentLoaded', async () => {
+            const totalDownloadsEl = document.getElementById('total-downloads-stat');
+            if (totalDownloadsEl && typeof PROGRAMS !== 'undefined') {
+                let total = 0;
+                for (const p of PROGRAMS) {
+                    const ghInfo = parseGithubReleaseUrl(p.link);
+                    if (ghInfo) {
+                        const cacheKey = `gh_release_v3_${ghInfo.owner}_${ghInfo.repo}_${ghInfo.filename}`;
+                        let cachedCount = null;
+                        try {
+                            const cachedStr = localStorage.getItem(cacheKey);
+                            if (cachedStr) {
+                                const cached = JSON.parse(cachedStr);
+                                if (cached.timestamp && (Date.now() - cached.timestamp < 3600000)) {
+                                    cachedCount = cached.count;
+                                }
+                            }
+                        } catch (e) {}
+
+                        if (cachedCount !== null) {
+                            total += cachedCount;
+                            continue;
+                        }
+
+                        const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
+                        if (info) {
+                            total += (p.download_count + info.count);
+                            // Caching is handled on program load, so we don't necessarily need to rewrite the cache here,
+                            // but adding to total is fine.
+                            continue;
+                        }
+                    }
+                    total += p.download_count;
+                }
+                totalDownloadsEl.setAttribute('data-target', total);
+            }
+        });
+
+        // 3D Tilt effect for direction cards
+        const cards = document.querySelectorAll('.direction-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                card.style.transition = 'transform 0.5s ease';
+            });
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
         });
     </script>
 

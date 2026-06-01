@@ -737,3 +737,23 @@ html, body {
         height: 44px;
     }
 }
+
+
+@media (max-width: 768px) {
+    .featured-card {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+    .featured-image {
+        height: 250px !important;
+        order: -1;
+    }
+}
+
+
+.card-cover:hover .card-overlay {
+    opacity: 1 !important;
+}
+.card-cover:hover .card-overlay span {
+    transform: translateY(0) !important;
+}
