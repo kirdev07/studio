@@ -111,10 +111,12 @@ async function fetchGithubReleaseInfo(owner, repo, filename) {
         }
       }
 
-      return { count, latestVersion, downloadLink };
+      const repoUrl = `https://github.com/${owner}/${repo}`;
+      const changelog = latestRelease.body || '';
+      return { count, latestVersion, downloadLink, repoUrl, changelog };
     }
 
-    return { count, latestVersion: null, downloadLink: null };
+    return { count, latestVersion: null, downloadLink: null, repoUrl: null, changelog: null };
   } catch (e) {
     console.error('Ошибка получения статистики с GitHub API:', e);
     return null;
@@ -129,9 +131,9 @@ async function updateDownloadCounters() {
 
   const getInfo = async (program) => {
     const ghInfo = parseGithubReleaseUrl(program.link);
-    if (!ghInfo) return { count: program.download_count, version: program.version, link: program.link };
+    if (!ghInfo) return { count: program.download_count, version: program.version, link: program.link, repoUrl: null, changelog: null };
 
-    const cacheKey = `gh_release_v2_${ghInfo.owner}_${ghInfo.repo}_${ghInfo.filename}`;
+    const cacheKey = `gh_release_v3_${ghInfo.owner}_${ghInfo.repo}_${ghInfo.filename}`;
 
     // Check localStorage cache first
     try {
@@ -153,6 +155,8 @@ async function updateDownloadCounters() {
         count: info.count,
         version: info.latestVersion && info.latestVersion !== 'pc' ? info.latestVersion.replace(/^v/, '') : program.version,
         link: info.downloadLink || program.link,
+        repoUrl: info.repoUrl,
+        changelog: info.changelog,
         timestamp: Date.now()
       };
 
@@ -165,7 +169,7 @@ async function updateDownloadCounters() {
 
       return result;
     }
-    return { count: program.download_count, version: program.version, link: program.link };
+    return { count: program.download_count, version: program.version, link: program.link, repoUrl: null, changelog: null };
   };
 
   // Обновляем информацию в каталоге (programs.html)
@@ -213,6 +217,26 @@ async function updateDownloadCounters() {
       const downloadBtn = detailContainer.querySelector('.download-btn');
       if (downloadBtn) {
         downloadBtn.href = info.link;
+      }
+
+      // Кнопка исходного кода (GitHub)
+      if (info.repoUrl) {
+        const repoBtn = detailContainer.querySelector('.repo-btn');
+        if (repoBtn) {
+          repoBtn.href = info.repoUrl;
+          repoBtn.style.display = 'inline-flex';
+        }
+      }
+
+      // Журнал изменений (Changelog)
+      if (info.changelog) {
+        const changelogSection = detailContainer.querySelector('.changelog-section');
+        const changelogContent = detailContainer.querySelector('.changelog-content');
+        if (changelogSection && changelogContent) {
+           // Parse basic markdown from GitHub releases (very basic: handle lists and links if needed, but innerText is safer)
+           changelogContent.textContent = info.changelog;
+           changelogSection.style.display = 'block';
+        }
       }
     }
   }
