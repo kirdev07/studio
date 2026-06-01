@@ -23,7 +23,7 @@ const PROGRAMS = [
     "link": "https://github.com/kirya07kz/Pulse-PC/releases/download/pc/Pulse.PC.Setup.exe",
     "cover_image": "static/images/Pulse_PC/main.png",
     "category": "ПК",
-    "download_count": 218
+    "download_count": 0
   },
   {
     "id": 2,
@@ -53,7 +53,7 @@ const PROGRAMS = [
     "link": "https://github.com/kirya07kz/Kiro-BOT-VK-2.00/releases/download/v2.00/app-release.apk",
     "cover_image": "static/images/Kiro_Bot/main.jpg",
     "category": "Android",
-    "download_count": 315
+    "download_count": 0
   }
 ];
 
@@ -131,7 +131,7 @@ async function updateDownloadCounters() {
     const ghInfo = parseGithubReleaseUrl(program.link);
     if (!ghInfo) return { count: program.download_count, version: program.version, link: program.link };
 
-    const cacheKey = `gh_release_${ghInfo.owner}_${ghInfo.repo}_${ghInfo.filename}`;
+    const cacheKey = `gh_release_v2_${ghInfo.owner}_${ghInfo.repo}_${ghInfo.filename}`;
 
     // Check localStorage cache first
     try {
@@ -150,7 +150,7 @@ async function updateDownloadCounters() {
     const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
     if (info !== null) {
       const result = {
-        count: program.download_count + info.count,
+        count: info.count,
         version: info.latestVersion && info.latestVersion !== 'pc' ? info.latestVersion.replace(/^v/, '') : program.version,
         link: info.downloadLink || program.link,
         timestamp: Date.now()
