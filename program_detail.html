@@ -163,8 +163,7 @@
                     <div class="detail-title">
                         <h1>${program.name}</h1>
                         <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
-                            <span class="badge"
-                                style="font-size: 0.9rem; background: rgba(255,255,255,0.15); color: #fff;">Версия ${program.version}</span>
+                            <span class="badge version-badge" style="font-size: 0.9rem; background: rgba(255,255,255,0.15); color: #fff;">Версия ${program.version}</span>
                             <span class="badge"
                                 style="font-size: 0.9rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-secondary);">${program.category}</span>
                             <span
@@ -180,7 +179,7 @@
                             </span>
                         </div>
                     </div>
-                    <a href="${downloadUrl}" ${linkAttributes} class="btn-primary lg">
+                    <a href="${downloadUrl}" ${linkAttributes} class="btn-primary lg download-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
