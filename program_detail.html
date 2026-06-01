@@ -10,6 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/style.css?v=1.4">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" id="og-title" content="Скачать бесплатно на KirDev Studio">
+    <meta property="og:description" id="og-desc" content="Надежные и безопасные программы для ваших задач от KirDev Studio.">
+    <meta property="og:image" id="og-img" content="https://kirya07kz.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
+    <meta property="og:url" id="og-url" content="https://kirya07kz.github.io/kirdev-studio.github.io/program_detail.html">
 </head>
 <body>
     <div class="glow-orb"></div>
@@ -131,8 +137,25 @@
 
             // Устанавливаем мета-теги и заголовок
             document.title = `${program.name} — Скачать бесплатно на KirDev Studio`;
+
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) metaDesc.setAttribute('content', program.description);
+
+            // Update OpenGraph tags
+            const ogTitle = document.getElementById('og-title');
+            if (ogTitle) ogTitle.setAttribute('content', `${program.name} — Скачать бесплатно на KirDev Studio`);
+
+            const ogDesc = document.getElementById('og-desc');
+            if (ogDesc) ogDesc.setAttribute('content', program.description);
+
+            const ogImg = document.getElementById('og-img');
+            // Assuming cover_image is a relative path, convert to absolute for OG
+            const absoluteImgUrl = window.location.origin + '/' + program.cover_image;
+            if (ogImg) ogImg.setAttribute('content', absoluteImgUrl);
+
+            const ogUrl = document.getElementById('og-url');
+            if (ogUrl) ogUrl.setAttribute('content', window.location.href);
+
 
             // Генерируем разметку
             let featuresHtml = '';
@@ -381,6 +404,34 @@
                     showCarouselImage(idx);
                 });
             });
+
+            // Touch Swipe Logic for Carousel
+            const carouselContainer = document.querySelector('.screenshots-carousel');
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            if (carouselContainer) {
+                carouselContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                carouselContainer.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                }, { passive: true });
+
+                function handleSwipe() {
+                    const swipeThreshold = 50; // Minimum distance to register as a swipe
+                    if (touchEndX < touchStartX - swipeThreshold) {
+                        // Swiped left
+                        showCarouselImage(carouselIndex + 1);
+                    }
+                    if (touchEndX > touchStartX + swipeThreshold) {
+                        // Swiped right
+                        showCarouselImage(carouselIndex - 1);
+                    }
+                }
+            }
 
             // Лайтбокс
             const screenshots = Array.from(document.querySelectorAll('.screenshot-img'))

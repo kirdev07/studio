@@ -131,17 +131,38 @@ async function updateDownloadCounters() {
     const ghInfo = parseGithubReleaseUrl(program.link);
     if (!ghInfo) return { count: program.download_count, version: program.version, link: program.link };
 
-    const cacheKey = `${ghInfo.owner}/${ghInfo.repo}/${ghInfo.filename}`;
-    if (cache[cacheKey] !== undefined) return cache[cacheKey];
+    const cacheKey = `gh_release_${ghInfo.owner}_${ghInfo.repo}_${ghInfo.filename}`;
+
+    // Check localStorage cache first
+    try {
+      const cachedDataStr = localStorage.getItem(cacheKey);
+      if (cachedDataStr) {
+        const cachedData = JSON.parse(cachedDataStr);
+        // Add 1 hour expiration check
+        if (cachedData.timestamp && (Date.now() - cachedData.timestamp < 3600000)) {
+           return cachedData;
+        }
+      }
+    } catch (e) {
+      console.warn('SessionStorage cache read error:', e);
+    }
 
     const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
     if (info !== null) {
       const result = {
         count: program.download_count + info.count,
         version: info.latestVersion && info.latestVersion !== 'pc' ? info.latestVersion.replace(/^v/, '') : program.version,
-        link: info.downloadLink || program.link
+        link: info.downloadLink || program.link,
+        timestamp: Date.now()
       };
-      cache[cacheKey] = result;
+
+      // Save to localStorage cache
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(result));
+      } catch(e) {
+        console.warn('SessionStorage cache write error:', e);
+      }
+
       return result;
     }
     return { count: program.download_count, version: program.version, link: program.link };
