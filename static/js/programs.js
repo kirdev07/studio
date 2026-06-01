@@ -72,13 +72,15 @@ function parseGithubReleaseUrl(url) {
   }
 }
 
-// Функция для получения реального счетчика скачиваний с GitHub API
-async function fetchGithubDownloadCount(owner, repo, filename) {
+// Функция для получения информации о релизах (счетчик скачиваний, последняя версия и ссылка)
+async function fetchGithubReleaseInfo(owner, repo, filename) {
   try {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
     if (!response.ok) return null;
     const releases = await response.json();
     let count = 0;
+
+    // Подсчет общего количества скачиваний
     releases.forEach(release => {
       if (release.assets) {
         release.assets.forEach(asset => {
@@ -88,52 +90,109 @@ async function fetchGithubDownloadCount(owner, repo, filename) {
         });
       }
     });
-    return count;
+
+    // Получение информации о последнем релизе
+    if (releases.length > 0) {
+      const latestRelease = releases[0];
+      let latestVersion = latestRelease.tag_name;
+      // Убираем 'v' если есть в начале
+      if (latestVersion && latestVersion.startsWith('v')) {
+        latestVersion = latestVersion.substring(1);
+      } else if (latestVersion === 'pc') {
+        // Хардкод для Pulse PC где тег 'pc'
+        latestVersion = '1.0.0';
+      }
+
+      let downloadLink = null;
+      if (latestRelease.assets && latestRelease.assets.length > 0) {
+        const asset = latestRelease.assets.find(a => a.name === filename);
+        if (asset) {
+          downloadLink = asset.browser_download_url;
+        }
+      }
+
+      return { count, latestVersion, downloadLink };
+    }
+
+    return { count, latestVersion: null, downloadLink: null };
   } catch (e) {
     console.error('Ошибка получения статистики с GitHub API:', e);
     return null;
   }
 }
 
-// Функция обновления счетчиков на странице
+// Функция обновления счетчиков и ссылок на странице
 async function updateDownloadCounters() {
-  const catalogCounters = document.querySelectorAll('.download-counter');
-  const detailCounter = document.getElementById('detail-download-counter');
+  const catalogCards = document.querySelectorAll('.program-card');
+  const detailContainer = document.getElementById('detail-container');
   const cache = {};
 
-  const getCount = async (program) => {
+  const getInfo = async (program) => {
     const ghInfo = parseGithubReleaseUrl(program.link);
-    if (!ghInfo) return program.download_count;
+    if (!ghInfo) return { count: program.download_count, version: program.version, link: program.link };
 
     const cacheKey = `${ghInfo.owner}/${ghInfo.repo}/${ghInfo.filename}`;
     if (cache[cacheKey] !== undefined) return cache[cacheKey];
 
-    const count = await fetchGithubDownloadCount(ghInfo.owner, ghInfo.repo, ghInfo.filename);
-    if (count !== null) {
-      cache[cacheKey] = count;
-      return count;
+    const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
+    if (info !== null) {
+      const result = {
+        count: program.download_count + info.count,
+        version: info.latestVersion && info.latestVersion !== 'pc' ? info.latestVersion.replace(/^v/, '') : program.version,
+        link: info.downloadLink || program.link
+      };
+      cache[cacheKey] = result;
+      return result;
     }
-    return program.download_count;
+    return { count: program.download_count, version: program.version, link: program.link };
   };
 
-  // Обновляем счетчики в каталоге
-  for (const counterEl of catalogCounters) {
-    const programId = parseInt(counterEl.getAttribute('data-program-id'));
-    const program = PROGRAMS.find(p => p.id === programId);
-    if (program) {
-      const realCount = await getCount(program);
-      counterEl.textContent = realCount;
+  // Обновляем информацию в каталоге (programs.html)
+  if (catalogCards.length > 0) {
+    for (const card of catalogCards) {
+      const counterEl = card.querySelector('.download-counter');
+      if (!counterEl) continue;
+
+      const programId = parseInt(counterEl.getAttribute('data-program-id'));
+      const program = PROGRAMS.find(p => p.id === programId);
+      if (program) {
+        const info = await getInfo(program);
+        counterEl.textContent = info.count;
+
+        // Обновляем версию
+        const versionBadge = card.querySelector('.version-badge');
+        if (versionBadge) {
+          versionBadge.textContent = 'v' + info.version;
+        }
+      }
     }
   }
 
-  // Обновляем счетчик на странице деталей
-  if (detailCounter) {
+  // Обновляем информацию на странице деталей (program_detail.html)
+  if (detailContainer) {
+    const detailCounter = document.getElementById('detail-download-counter');
     const urlParams = new URLSearchParams(window.location.search);
     const programId = parseInt(urlParams.get('id'));
     const program = PROGRAMS.find(p => p.id === programId);
+
     if (program) {
-      const realCount = await getCount(program);
-      detailCounter.textContent = realCount;
+      const info = await getInfo(program);
+
+      if (detailCounter) {
+        detailCounter.textContent = info.count;
+      }
+
+      // Обновляем версию в бейдже
+      const versionBadge = detailContainer.querySelector('.version-badge');
+      if (versionBadge) {
+        versionBadge.textContent = 'Версия ' + info.version;
+      }
+
+      // Обновляем ссылку на скачивание
+      const downloadBtn = detailContainer.querySelector('.download-btn');
+      if (downloadBtn) {
+        downloadBtn.href = info.link;
+      }
     }
   }
 }
