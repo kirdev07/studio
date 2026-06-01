@@ -146,7 +146,7 @@ async function updateDownloadCounters() {
         }
       }
     } catch (e) {
-      console.warn('SessionStorage cache read error:', e);
+      console.warn('LocalStorage cache read error:', e);
     }
 
     const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
@@ -164,7 +164,7 @@ async function updateDownloadCounters() {
       try {
         localStorage.setItem(cacheKey, JSON.stringify(result));
       } catch(e) {
-        console.warn('SessionStorage cache write error:', e);
+        console.warn('LocalStorage cache write error:', e);
       }
 
       return result;
@@ -184,11 +184,15 @@ async function updateDownloadCounters() {
         const info = await getInfo(program);
         counterEl.textContent = info.count;
 
+        counterEl.classList.remove('skeleton');
+
         // Обновляем версию
         const versionBadge = card.querySelector('.version-badge');
         if (versionBadge) {
           versionBadge.textContent = 'v' + info.version;
+          versionBadge.classList.remove('skeleton');
         }
+
       }
     }
   }
@@ -203,15 +207,19 @@ async function updateDownloadCounters() {
     if (program) {
       const info = await getInfo(program);
 
+
       if (detailCounter) {
         detailCounter.textContent = info.count;
+        detailCounter.classList.remove('skeleton');
       }
 
       // Обновляем версию в бейдже
       const versionBadge = detailContainer.querySelector('.version-badge');
       if (versionBadge) {
         versionBadge.textContent = 'Версия ' + info.version;
+        versionBadge.classList.remove('skeleton');
       }
+
 
       // Обновляем ссылку на скачивание
       const downloadBtn = detailContainer.querySelector('.download-btn');

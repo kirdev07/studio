@@ -66,7 +66,7 @@
             <!-- Image Wrapper for smooth transitions -->
             <div
                 style="position: relative; width: 92%; height: 88%; display: flex; align-items: center; justify-content: center;">
-                <img id="lightbox-img" src="" alt="Увеличенный скриншот"
+                <img loading="lazy" id="lightbox-img" src="" alt="Увеличенный скриншот"
                     style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease; cursor: pointer;">
             </div>
 
@@ -153,9 +153,9 @@
             const absoluteImgUrl = window.location.origin + '/' + program.cover_image;
             if (ogImg) ogImg.setAttribute('content', absoluteImgUrl);
 
+
             const ogUrl = document.getElementById('og-url');
             if (ogUrl) ogUrl.setAttribute('content', window.location.href);
-
 
             // Генерируем разметку
             let featuresHtml = '';
@@ -178,7 +178,7 @@
                 <!-- Cover Banner -->
                 <div class="detail-banner"
                     style="width: 100%; height: 280px; overflow: hidden; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 40px; background: #000;">
-                    <img src="${program.cover_image}" alt="Баннер ${program.name}"
+                    <img loading="lazy" src="${program.cover_image}" alt="Баннер ${program.name}"
                         style="width: 100%; height: 100%; object-fit: cover; object-position: top;">
                 </div>
 
@@ -186,7 +186,7 @@
                     <div class="detail-title">
                         <h1>${program.name}</h1>
                         <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
-                            <span class="badge version-badge" style="font-size: 0.9rem; background: rgba(255,255,255,0.15); color: #fff;">Версия ${program.version}</span>
+                            <span class="badge version-badge skeleton" style="font-size: 0.9rem; background: rgba(255,255,255,0.15); color: #fff;">Версия ${program.version}</span>
                             <span class="badge"
                                 style="font-size: 0.9rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-secondary);">${program.category}</span>
                             <span
@@ -198,11 +198,17 @@
                                     <polyline points="7 10 12 15 17 10"></polyline>
                                     <line x1="12" y1="15" x2="12" y2="3"></line>
                                 </svg>
-                                Скачано: <span id="detail-download-counter">${program.download_count}</span> раз
+                                Скачано: <span id="detail-download-counter" class="skeleton">${program.download_count}</span> раз
                             </span>
                         </div>
                     </div>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary lg repo-btn" style="display: none;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            Страница на GitHub
+                        </a>
                         <a href="${downloadUrl}" ${linkAttributes} class="btn-primary lg download-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -212,12 +218,12 @@
                             </svg>
                             Скачать безопасно
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary lg repo-btn" style="display: none;">
+                        <button id="share-btn" class="btn-secondary lg" style="display: flex; align-items: center; justify-content: center; outline: none;">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                             </svg>
-                            Страница на GitHub
-                        </a>
+                            <span id="share-text" style="margin-left: 8px;">Поделиться</span>
+                        </button>
                     </div>
                 </div>
 
@@ -283,7 +289,7 @@
                     <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;">
                         Мы — хобби-студия, и нам очень важен фидбек. Напишите нам в Telegram, если у вас есть предложения по улучшению программы или вы столкнулись с проблемой.
                     </p>
-                    <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="display: inline-flex; justify-content: center;">
+                    <a href="https://t.me/kirdev_studio?direct" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="display: inline-flex; justify-content: center;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                         Написать в Telegram
                     </a>
@@ -307,7 +313,7 @@
                     slide.style.justifyContent = 'center';
                     slide.style.position = 'relative';
                     slide.innerHTML = `
-                        <img src="${shot}" alt="Скриншот ${program.name}"
+                        <img loading="lazy" src="${shot}" alt="Скриншот ${program.name}"
                             style="width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.3s ease;"
                             class="screenshot-img"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -357,6 +363,39 @@
             // Инициализация карусели и лайтбокса
             initCarouselAndLightbox();
             updateDownloadCounters();
+
+            // Update single Share button logic (Web Share API / Clipboard Fallback)
+            const shareBtn = document.getElementById('share-btn');
+            const shareTextSpan = document.getElementById('share-text');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', async () => {
+                    const shareData = {
+                        title: program.name,
+                        text: program.description,
+                        url: window.location.href
+                    };
+
+                    if (navigator.share) {
+                        try {
+                            await navigator.share(shareData);
+                        } catch (err) {
+                            console.log('Пользователь отменил поделиться или произошла ошибка:', err);
+                        }
+                    } else {
+                        // Fallback to copying to clipboard
+                        try {
+                            await navigator.clipboard.writeText(window.location.href);
+                            shareTextSpan.textContent = 'Ссылка скопирована!';
+                            setTimeout(() => {
+                                shareTextSpan.textContent = 'Поделиться';
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Не удалось скопировать ссылку: ', err);
+                        }
+                    }
+                });
+            }
+
         });
 
         function initCarouselAndLightbox() {
@@ -574,6 +613,36 @@
             "color: #aaaaaa; font-size: 14px; margin-top: 10px;"
         );
     </script>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+
+    <!-- Scroll to Top Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>
