@@ -137,7 +137,7 @@ async function updateDownloadCounters() {
     const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
     if (info !== null) {
       const result = {
-        count: info.count,
+        count: program.download_count + info.count,
         version: info.latestVersion && info.latestVersion !== 'pc' ? info.latestVersion.replace(/^v/, '') : program.version,
         link: info.downloadLink || program.link
       };
