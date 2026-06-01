@@ -146,7 +146,7 @@ async function updateDownloadCounters() {
         }
       }
     } catch (e) {
-      console.warn('SessionStorage cache read error:', e);
+      console.warn('LocalStorage cache read error:', e);
     }
 
     const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
@@ -164,7 +164,7 @@ async function updateDownloadCounters() {
       try {
         localStorage.setItem(cacheKey, JSON.stringify(result));
       } catch(e) {
-        console.warn('SessionStorage cache write error:', e);
+        console.warn('LocalStorage cache write error:', e);
       }
 
       return result;
