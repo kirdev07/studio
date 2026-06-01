@@ -757,3 +757,49 @@ html, body {
 .card-cover:hover .card-overlay span {
     transform: translateY(0) !important;
 }
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+
+@media (max-width: 768px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-actions .btn-primary.lg,
+    .hero-actions .btn-secondary.lg {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .detail-header > div:last-child {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .detail-header .btn-primary.lg,
+    .detail-header .btn-secondary.lg {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .detail-actions-wrapper {
+        flex-direction: column;
+        width: 100%;
+    }
+    .detail-actions-wrapper a, .detail-actions-wrapper button {
+        width: 100%;
+        justify-content: center;
+    }
+}
