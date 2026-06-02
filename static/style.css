@@ -79,6 +79,7 @@ html, body {
 
 .header-inner {
     display: flex;
+    position: relative;
     justify-content: space-between;
     align-items: center;
     height: 80px;
@@ -992,36 +993,38 @@ html, body {
 /* Theme Toggle Button Styles */
 .theme-toggle {
     background: transparent;
-    border: none;
-    color: var(--text-secondary); /* Gray in dark mode */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a0a0a0; /* Gray in dark mode */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     transition: all 0.3s ease;
     margin-left: 16px;
-    margin-right: auto; /* Push it next to the logo */
+    margin-right: auto;
 }
 .theme-toggle:hover {
-    color: var(--text-primary);
-    background: var(--glass-bg);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 :root[data-theme="light"] .theme-toggle {
-    color: #000; /* Black in light mode */
+    color: #000000; /* Black in light mode */
+    border-color: rgba(0, 0, 0, 0.2);
+}
+:root[data-theme="light"] .theme-toggle:hover {
+    color: #000000;
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 1024px) {
     .theme-toggle {
-        margin-left: 16px; /* Keep it next to logo even on mobile */
+        margin-left: 16px;
         margin-right: auto;
-        margin-top: 0;
-        align-self: center;
-        background: transparent;
-        border: none;
-        width: 36px;
-        height: 36px;
     }
 }
