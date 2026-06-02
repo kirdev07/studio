@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kirya07kz.github.io/kirdev-studio.github.io/sitemap.xml
