@@ -1,3 +1,6 @@
+/* ==========================================================================
+   Global Variables
+   ========================================================================== */
 :root {
     --bg-color: #050505;
     --text-primary: #ffffff;
@@ -8,6 +11,9 @@
     --accent-hover: #e0e0e0;
 }
 
+/* ==========================================================================
+   Base Reset and General Styles
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +37,9 @@ html, body {
     padding: 0 24px;
 }
 
-/* Background effects */
+/* ==========================================================================
+   Background effects - glowing orbs
+   ========================================================================== */
 .glow-orb {
     position: absolute;
     width: 600px;
@@ -52,7 +60,9 @@ html, body {
     height: 800px;
 }
 
-/* Header & Nav */
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
 .header {
     position: fixed;
     top: 0;
@@ -101,7 +111,9 @@ html, body {
     color: var(--text-primary);
 }
 
-/* Mobile Menu Toggle */
+/* ==========================================================================
+   Mobile Menu Toggle
+   ========================================================================== */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -121,7 +133,9 @@ html, body {
     transition: all 0.3s linear;
 }
 
-/* Buttons */
+/* ==========================================================================
+   Buttons and interactive elements
+   ========================================================================== */
 .btn-primary {
     background: #222222;
     color: #ffffff;
@@ -177,7 +191,9 @@ html, body {
     border-radius: 12px;
 }
 
-/* Utility Classes */
+/* ==========================================================================
+   Utility Classes for generic layout spacing
+   ========================================================================== */
 .section-padding {
     padding: 100px 0;
 }
@@ -188,7 +204,9 @@ html, body {
     margin-top: auto;
 }
 
-/* Hero Section */
+/* ==========================================================================
+   Hero Section - Main landing screen styles
+   ========================================================================== */
 .hero {
     padding: 180px 0 100px;
 }
@@ -249,7 +267,9 @@ html, body {
     }
 }
 
-/* Directions Grid */
+/* ==========================================================================
+   Directions Section - "What we do" grid and cards
+   ========================================================================== */
 .directions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -296,7 +316,9 @@ html, body {
     line-height: 1.6;
 }
 
-/* Section titles */
+/* ==========================================================================
+   Typography - Section Titles
+   ========================================================================== */
 .section-title {
     font-size: clamp(2rem, 6vw, 2.5rem);
     font-weight: 800;
@@ -304,7 +326,9 @@ html, body {
     letter-spacing: -1px;
 }
 
-/* Portfolio Section */
+/* ==========================================================================
+   Portfolio Section - Program cards grid
+   ========================================================================== */
 .portfolio {
     padding: 100px 0;
 }
@@ -359,7 +383,9 @@ html, body {
     flex-grow: 1;
 }
 
-/* Program Detail Page */
+/* ==========================================================================
+   Program Detail Page - specific styles for individual program view
+   ========================================================================== */
 .detail-header {
     display: flex; 
     justify-content: space-between; 
@@ -397,7 +423,9 @@ html, body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-/* Footer */
+/* ==========================================================================
+   Footer - Site footer styles
+   ========================================================================== */
 .footer {
     border-top: 1px solid var(--border-color);
     padding: 60px 0;
@@ -422,7 +450,9 @@ html, body {
     font-size: 0.875rem;
 }
 
-/* Responsive (Tablets & Phones) */
+/* ==========================================================================
+   Media Queries - Responsive styles for different breakpoints
+   ========================================================================== */
 @media (max-width: 1024px) {
     /* Mobile Menu Toggle & Nav */
     .menu-toggle {
@@ -554,7 +584,9 @@ html, body {
 }
 
 
-/* Category Filter Tabs */
+/* ==========================================================================
+   Category Filter Tabs - for programs page filtering
+   ========================================================================== */
 .filter-container {
     display: flex;
     justify-content: center;
@@ -591,7 +623,9 @@ html, body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Lightbox Navigation Buttons */
+/* ==========================================================================
+   Lightbox - Image preview modal styles
+   ========================================================================== */
 .lightbox-btn {
     position: absolute;
     top: 50%;
@@ -644,7 +678,9 @@ html, body {
     }
 }
 
-/* In-page Screenshots Carousel */
+/* ==========================================================================
+   Carousel - Screenshot carousel on detail page
+   ========================================================================== */
 .carousel-btn {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(4px);
@@ -668,7 +704,9 @@ html, body {
 }
 
 
-/* Skeleton Loader */
+/* ==========================================================================
+   Skeleton Loader - Loading state animation
+   ========================================================================== */
 .skeleton {
     background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 75%);
     background-size: 200% 100%;
@@ -693,7 +731,9 @@ html, body {
 }
 
 
-/* Scroll to Top Button */
+/* ==========================================================================
+   Scroll to Top - Floating action button
+   ========================================================================== */
 #scroll-to-top {
     position: fixed;
     bottom: 30px;

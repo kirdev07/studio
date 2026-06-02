@@ -1,7 +1,7 @@
 ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ (PRIVACY POLICY)
 ===========================================
 
-Последнее обновление: 29 мая 2024 г.
+Последнее обновление: 29 мая 2026 г.
 
 Настоящая Политика конфиденциальности описывает, как веб-сайт KirDev Studio взаимодействует с данными пользователей.
 
@@ -26,7 +26,7 @@
 PRIVACY POLICY
 ==============
 
-Last updated: May 29, 2024
+Last updated: May 29, 2026
 
 This Privacy Policy describes how the KirDev Studio website handles user data.
 
