@@ -300,18 +300,18 @@ html, body {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--glass-bg);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--text-primary);
     border: 1px solid var(--border-color);
     margin-bottom: 8px;
 }
 .direction-card h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
 }
 .direction-card p {
     font-size: 0.9rem;
@@ -1003,8 +1003,6 @@ html, body {
     height: 36px;
     border-radius: 50%;
     transition: all 0.3s ease;
-    margin-left: 16px;
-    margin-right: auto;
 }
 .theme-toggle:hover {
     color: #ffffff;
@@ -1024,7 +1022,6 @@ html, body {
 
 @media (max-width: 1024px) {
     .theme-toggle {
-        margin-left: 16px;
-        margin-right: auto;
+        margin: 0;
     }
 }
