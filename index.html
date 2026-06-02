@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KirDev Studio - Надежный софт для ваших задач</title>
     <meta name="description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio. Безопасность и стабильность.">
-    <link rel="icon" type="image/svg+xml" href="static/favicon_code.svg?v=2">
+    <link rel="icon" type="image/svg+xml" href="static/favicon_code.svg?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -353,8 +353,14 @@
                         const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
                         if (info) {
                             total += (p.download_count + info.count);
-                            // Caching is handled on program load, so we don't necessarily need to rewrite the cache here,
-                            // but adding to total is fine.
+                            try {
+                                localStorage.setItem(cacheKey, JSON.stringify({
+                                    count: info.count,
+                                    version: info.version,
+                                    changelog: info.changelog,
+                                    timestamp: Date.now()
+                                }));
+                            } catch (e) {}
                             continue;
                         }
                     }
