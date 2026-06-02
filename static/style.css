@@ -858,3 +858,20 @@ html, body {
         object-fit: contain !important;
     }
 }
+#search-input:focus {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+#sort-select:focus {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
+/* ==========================================================================
+   Search and Sort specific styles
+   ========================================================================== */
+#search-input:focus {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+#sort-select:focus {
+    border-color: rgba(255, 255, 255, 0.4) !important;
+}
