@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KirDev Studio - Надежный софт для ваших задач</title>
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KirDev Studio - Надежный софт для ваших задач">
+    <meta name="twitter:description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio.">
+    <meta name="twitter:image" content="https://kirya07kz.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kirya07kz.github.io/kirdev-studio.github.io/index.html">
+
     <meta name="description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio. Безопасность и стабильность.">
     <link rel="icon" type="image/svg+xml" href="static/favicon_code.svg?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +24,18 @@
     <meta property="og:description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio. Безопасность и стабильность.">
     <meta property="og:image" content="https://kirya07kz.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
     <meta property="og:url" content="https://kirya07kz.github.io/kirdev-studio.github.io/">
+    <script>
+        (function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
 </head>
 <body>
     <div class="glow-orb"></div>
@@ -34,6 +54,11 @@
                 <a href="programs.html">Программы</a>
                 <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer">Telegram</a>
                 <a href="https://vk.com/kirdev_07" target="_blank" rel="noopener noreferrer">VK</a>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
             </nav>
         </div>
     </header>
@@ -394,6 +419,37 @@
 
             card.addEventListener('mouseenter', () => {
                 card.style.transition = 'none';
+            });
+        });
+    </script>
+
+
+    <!-- Theme Toggle Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const sunIcon = themeToggle.querySelector('.sun-icon');
+            const moonIcon = themeToggle.querySelector('.moon-icon');
+
+            const updateIcons = () => {
+                if (document.documentElement.getAttribute('data-theme') === 'light') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            };
+
+            updateIcons();
+
+            themeToggle.addEventListener('click', () => {
+                let currentTheme = document.documentElement.getAttribute('data-theme');
+                let newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateIcons();
             });
         });
     </script>
