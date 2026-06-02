@@ -44,6 +44,11 @@
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">KirDev <span>Studio</span></a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+
             <button class="menu-toggle" id="mobile-menu">
                 <span></span>
                 <span></span>
@@ -55,10 +60,6 @@
                 <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer">Telegram</a>
                 <a href="https://vk.com/kirdev_07" target="_blank" rel="noopener noreferrer">VK</a>
 
-            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
-                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
             </nav>
         </div>
     </header>
@@ -86,15 +87,15 @@
             <div class="container">
                 <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; text-align: center;">
                     <div class="stat-card" style="padding: 24px;">
-                        <h3 class="stat-number" data-target="2" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">0</h3>
+                        <h3 class="stat-number" data-target="2" style="font-size: 3rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">0</h3>
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Разработано программ</p>
                     </div>
                     <div class="stat-card" style="padding: 24px;">
-                        <h3 class="stat-number" id="total-downloads-stat" data-target="533" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">0</h3>
+                        <h3 class="stat-number" id="total-downloads-stat" data-target="533" style="font-size: 3rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">0</h3>
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Общих скачиваний</p>
                     </div>
                     <div class="stat-card" style="padding: 24px;">
-                        <h3 class="stat-number" data-target="1337" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 8px;">0</h3>
+                        <h3 class="stat-number" data-target="1337" style="font-size: 3rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">0</h3>
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Строк кода написано</p>
                     </div>
                 </div>
@@ -187,7 +188,7 @@
                 <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
                     
                     <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 12px; background: var(--glass-bg); overflow: hidden; transition: all 0.3s ease;">
-                        <button class="faq-trigger" style="width: 100%; padding: 24px; background: transparent; border: none; text-align: left; color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none;">
+                        <button class="faq-trigger" style="width: 100%; padding: 24px; background: transparent; border: none; text-align: left; color: var(--text-primary); font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none;">
                             <span>Безопасны ли ваши программы?</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease; color: var(--text-secondary);"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </button>
@@ -199,7 +200,7 @@
                     </div>
         
                     <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 12px; background: var(--glass-bg); overflow: hidden; transition: all 0.3s ease;">
-                        <button class="faq-trigger" style="width: 100%; padding: 24px; background: transparent; border: none; text-align: left; color: #fff; font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none;">
+                        <button class="faq-trigger" style="width: 100%; padding: 24px; background: transparent; border: none; text-align: left; color: var(--text-primary); font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none;">
                             <span>Почему это бесплатно?</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease; color: var(--text-secondary);"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </button>

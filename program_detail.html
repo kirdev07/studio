@@ -60,6 +60,11 @@
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">KirDev <span>Studio</span></a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+
             <button class="menu-toggle" id="mobile-menu">
                 <span></span>
                 <span></span>
@@ -71,10 +76,6 @@
                 <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer">Telegram</a>
                 <a href="https://vk.com/kirdev_07" target="_blank" rel="noopener noreferrer">VK</a>
 
-            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
-                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
             </nav>
         </div>
     </header>
@@ -94,7 +95,7 @@
             style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
             <!-- Close Button -->
             <button id="lightbox-close"
-                style="position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: #fff; cursor: pointer; font-size: 2.5rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; outline: none; transition: transform 0.2s ease; z-index: 1010;">&times;</button>
+                style="position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--text-primary); cursor: pointer; font-size: 2.5rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; outline: none; transition: transform 0.2s ease; z-index: 1010;">&times;</button>
 
             <!-- Prev Button -->
             <button id="lightbox-prev" class="lightbox-btn" aria-label="Предыдущий скриншот">
@@ -227,7 +228,7 @@
                     <div class="detail-title">
                         <h1>${program.name}</h1>
                         <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
-                            <span class="badge version-badge skeleton" style="font-size: 0.9rem; background: rgba(255,255,255,0.15); color: #fff;">Версия ${program.version}</span>
+                            <span class="badge version-badge skeleton" style="font-size: 0.9rem; background: rgba(255,255,255,0.15); color: var(--text-primary);">Версия ${program.version}</span>
                             <span class="badge"
                                 style="font-size: 0.9rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-secondary);">${program.category}</span>
                             <span
@@ -303,14 +304,14 @@
 
                     <!-- Navigation Buttons (In-page) -->
                     <button class="carousel-btn prev" aria-label="Предыдущий слайд"
-                        style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: #fff; cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; outline: none; z-index: 10;">
+                        style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; outline: none; z-index: 10;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                             stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="15 18 9 12 15 6"></polyline>
                         </svg>
                     </button>
                     <button class="carousel-btn next" aria-label="Следующий слайд"
-                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: #fff; cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; outline: none; z-index: 10;">
+                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; outline: none; z-index: 10;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                             stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
