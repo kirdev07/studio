@@ -194,7 +194,7 @@ async function updateDownloadCounters() {
             if (info.count > 200) {
                 tagsContainer.innerHTML += `<span class="badge" style="background: rgba(255, 65, 54, 0.2); color: #ff4136; border: 1px solid rgba(255, 65, 54, 0.3); backdrop-filter: blur(4px);">Популярное</span>`;
             }
-            if (p.id === 2) { // Just an example, hardcoded latest for now
+            if (program.id === 2) { // Just an example, hardcoded latest for now
                  tagsContainer.innerHTML += `<span class="badge" style="background: rgba(36, 161, 222, 0.2); color: #24A1DE; border: 1px solid rgba(36, 161, 222, 0.3); backdrop-filter: blur(4px);">Новинка</span>`;
             }
         }
