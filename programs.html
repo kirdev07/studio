@@ -44,6 +44,11 @@
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">KirDev <span>Studio</span></a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+
             <button class="menu-toggle" id="mobile-menu">
                 <span></span>
                 <span></span>
@@ -55,10 +60,6 @@
                 <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer">Telegram</a>
                 <a href="https://vk.com/kirdev_07" target="_blank" rel="noopener noreferrer">VK</a>
 
-            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
-                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
             </nav>
         </div>
     </header>
@@ -77,13 +78,13 @@
                     <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; background: var(--glass-bg); border: 1px solid var(--border-color); padding: 16px; border-radius: 16px; backdrop-filter: blur(10px);">
                         <div style="position: relative; flex-grow: 1; max-width: 400px;">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                            <input type="text" id="search-input" placeholder="Поиск программ..." style="width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: #fff; padding: 12px 16px 12px 48px; border-radius: 12px; font-size: 1rem; outline: none; transition: all 0.3s ease;">
+                            <input type="text" id="search-input" placeholder="Поиск программ..." style="width: 100%; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 12px 16px 12px 48px; border-radius: 12px; font-size: 1rem; outline: none; transition: all 0.3s ease;">
                         </div>
 
                         <div style="display: flex; gap: 12px; align-items: center;">
                             <label for="sort-select" style="color: var(--text-secondary); font-size: 0.9rem;">Сортировка:</label>
                             <div style="position: relative;">
-                                <select id="sort-select" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: #fff; padding: 10px 16px; border-radius: 10px; font-size: 0.9rem; outline: none; cursor: pointer; appearance: none; padding-right: 36px; min-width: 160px;">
+                                <select id="sort-select" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 16px; border-radius: 10px; font-size: 0.9rem; outline: none; cursor: pointer; appearance: none; padding-right: 36px; min-width: 160px;">
                                     <option value="new">Сначала новые</option>
                                     <option value="popular">Популярные</option>
                                     <option value="az">От А до Я</option>
@@ -106,7 +107,7 @@
                 <!-- Пустое состояние при фильтрации (показывается через JS) -->
                 <div id="empty-filter-msg" style="display: none; text-align: center; padding: 80px 20px; color: var(--text-secondary); background: var(--glass-bg); border: 1px dashed var(--border-color); border-radius: 20px; margin-bottom: 40px;">
                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 24px; opacity: 0.5;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="9" y1="9" x2="13" y2="13"></line><line x1="13" y1="9" x2="9" y2="13"></line></svg>
-                    <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 12px;">Программы не найдены</h3>
+                    <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 12px;">Программы не найдены</h3>
                     <p style="font-size: 1.1rem;">По вашему запросу ничего не нашлось. Попробуйте изменить параметры поиска или фильтры.</p>
                     <button class="btn-secondary" style="margin-top: 24px;" onclick="resetSearchAndFilters()">Сбросить всё</button>
                 </div>

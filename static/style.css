@@ -9,6 +9,8 @@
     --glass-bg: rgba(20, 20, 20, 0.5);
     --accent: #ffffff;
     --accent-hover: #e0e0e0;
+    --input-bg: rgba(0, 0, 0, 0.3);
+    --btn-primary-bg: #222222;
 }
 
 /* ==========================================================================
@@ -137,7 +139,7 @@ html, body {
    Buttons and interactive elements
    ========================================================================== */
 .btn-primary {
-    background: #222222;
+    background: var(--btn-primary-bg);
     color: #ffffff;
     padding: 10px 20px;
     border-radius: 8px;
@@ -616,7 +618,7 @@ html, body {
 }
 
 .filter-btn.active {
-    background: #222222;
+    background: var(--btn-primary-bg);
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.2);
     font-weight: 700;
@@ -887,6 +889,8 @@ html, body {
     --glass-bg: rgba(255, 255, 255, 0.7);
     --accent: #222222;
     --accent-hover: #444444;
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --btn-primary-bg: #000000;
 }
 
 :root[data-theme="light"] .glow-orb {
@@ -989,7 +993,7 @@ html, body {
 .theme-toggle {
     background: transparent;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-secondary); /* Gray in dark mode */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -998,20 +1002,26 @@ html, body {
     border-radius: 50%;
     transition: all 0.3s ease;
     margin-left: 16px;
+    margin-right: auto; /* Push it next to the logo */
 }
 .theme-toggle:hover {
     color: var(--text-primary);
     background: var(--glass-bg);
 }
 
+:root[data-theme="light"] .theme-toggle {
+    color: #000; /* Black in light mode */
+}
+
 @media (max-width: 1024px) {
     .theme-toggle {
-        margin-left: 0;
-        margin-top: 16px;
+        margin-left: 16px; /* Keep it next to logo even on mobile */
+        margin-right: auto;
+        margin-top: 0;
         align-self: center;
-        background: var(--glass-bg);
-        border: 1px solid var(--border-color);
-        width: 44px;
-        height: 44px;
+        background: transparent;
+        border: none;
+        width: 36px;
+        height: 36px;
     }
 }
