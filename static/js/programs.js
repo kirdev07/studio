@@ -142,6 +142,7 @@ async function updateDownloadCounters() {
         const cachedData = JSON.parse(cachedDataStr);
         // Add 1 hour expiration check
         if (cachedData.timestamp && (Date.now() - cachedData.timestamp < 3600000)) {
+           program.dynamic_count = cachedData.count + program.download_count;
            return cachedData;
         }
       }
@@ -151,6 +152,7 @@ async function updateDownloadCounters() {
 
     const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
     if (info !== null) {
+      program.dynamic_count = info.count + program.download_count;
       const result = {
         count: info.count,
         version: info.latestVersion && info.latestVersion !== 'pc' ? info.latestVersion.replace(/^v/, '') : program.version,
@@ -194,7 +196,9 @@ async function updateDownloadCounters() {
             if (info.count > 200) {
                 tagsContainer.innerHTML += `<span class="badge" style="background: rgba(255, 65, 54, 0.2); color: #ff4136; border: 1px solid rgba(255, 65, 54, 0.3); backdrop-filter: blur(4px);">Популярное</span>`;
             }
-            if (program.id === 2) { // Just an example, hardcoded latest for now
+            // Find the maximum ID to dynamically mark the latest program
+            const maxId = Math.max(...PROGRAMS.map(p => p.id));
+            if (program.id === maxId) {
                  tagsContainer.innerHTML += `<span class="badge" style="background: rgba(36, 161, 222, 0.2); color: #24A1DE; border: 1px solid rgba(36, 161, 222, 0.3); backdrop-filter: blur(4px);">Новинка</span>`;
             }
         }

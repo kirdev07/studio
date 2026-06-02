@@ -85,7 +85,7 @@
                         <h2 class="section-title" style="margin-bottom: 8px;">Последний релиз</h2>
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Самая свежая разработка студии</p>
                     </div>
-                    <a href="programs.html" class="btn-secondary" style="display: none; @media (min-width: 768px) { display: flex; }">Все программы &rarr;</a>
+                    <a href="programs.html" class="btn-secondary" class="btn-secondary d-none d-md-flex">Все программы &rarr;</a>
                 </div>
 
                 <div class="featured-card" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: var(--glass-bg); border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; align-items: center;">
@@ -356,7 +356,7 @@
                             try {
                                 localStorage.setItem(cacheKey, JSON.stringify({
                                     count: info.count,
-                                    version: info.version,
+                                    version: info.latestVersion,
                                     changelog: info.changelog,
                                     timestamp: Date.now()
                                 }));
