@@ -7,5 +7,9 @@
   },
   "devDependencies": {
     "browser-sync": "^3.0.0"
+  },
+  "dependencies": {
+    "jsdom": "^29.1.1",
+    "playwright": "^1.60.0"
   }
 }
