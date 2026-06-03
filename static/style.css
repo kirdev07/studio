@@ -934,7 +934,9 @@ html, body {
     background: var(--text-primary);
 }
 
-
+:root[data-theme="light"] .stat-card h3 {
+    color: var(--text-primary) !important;
+}
 
 :root[data-theme="light"] .text-gradient {
     background: linear-gradient(180deg, #111111 0%, #777777 100%);
@@ -1025,12 +1027,4 @@ html, body {
         margin-left: 16px;
         margin-right: auto;
     }
-}
-
-
-.direction-card h3 {
-    color: #ffffff !important;
-}
-.faq-trigger {
-    color: #ffffff !important;
 }
