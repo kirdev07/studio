@@ -6,7 +6,7 @@
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --border-color: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(20, 20, 20, 0.5);
+    --glass-bg: #000000;
     --accent: #ffffff;
     --accent-hover: #e0e0e0;
     --input-bg: rgba(0, 0, 0, 0.3);
@@ -83,6 +83,7 @@ html, body {
     justify-content: flex-start;
     align-items: center;
     height: 80px;
+    z-index: 1000;
 }
 
 .logo {
@@ -535,8 +536,6 @@ html, body {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
 }
 
 .filter-btn:hover {
@@ -931,6 +930,8 @@ html, body {
     border-radius: 50%;
     transition: all 0.3s ease;
     margin-left: 16px;
+    position: relative;
+    z-index: 1001;
 }
 .theme-toggle:hover {
     color: #ffffff;
@@ -954,4 +955,15 @@ html, body {
 /* Fix SVG colors in light mode */
 :root[data-theme="light"] .direction-icon svg {
     stroke: #000 !important;
+    color: #000 !important;
+}
+
+:root[data-theme="light"] .direction-card { background: #ffffff; }
+
+:root[data-theme="light"] .direction-icon { background: #ffffff; }
+
+/* Force white icons in dark theme */
+.direction-icon svg {
+    stroke: #ffffff;
+    color: #ffffff;
 }
