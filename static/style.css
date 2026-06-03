@@ -420,6 +420,7 @@ html, body {
     /* Mobile Menu Toggle & Nav */
     .menu-toggle {
         display: flex;
+        margin-left: auto;
     }
     
     .nav {
@@ -947,11 +948,7 @@ html, body {
     border-color: rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 1024px) {
-    .theme-toggle {
-        margin-left: 16px;
-    }
-}
+
 
 
 /* Fix SVG colors in light mode */
