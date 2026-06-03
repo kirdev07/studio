@@ -2,11 +2,11 @@
    Global Variables
    ========================================================================== */
 :root {
-    --bg-color: #050505;
+    --bg-color: #000000;
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --border-color: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(20, 20, 20, 0.5);
+    --glass-bg: #000000;
     --accent: #ffffff;
     --accent-hover: #e0e0e0;
     --input-bg: rgba(0, 0, 0, 0.3);
@@ -80,9 +80,10 @@ html, body {
 .header-inner {
     display: flex;
     position: relative;
-    justify-content: space-between;
+    justify-content: flex-start !important;
     align-items: center;
     height: 80px;
+    z-index: 100;
 }
 
 .logo {
@@ -92,6 +93,7 @@ html, body {
     color: var(--text-primary);
     letter-spacing: -0.5px;
     z-index: 101;
+    display: inline-block;
 }
 .logo span {
     color: var(--text-secondary);
@@ -100,6 +102,7 @@ html, body {
 
 .nav {
     display: flex;
+    margin-left: auto;
     align-items: center;
     gap: 32px;
 }
@@ -419,6 +422,7 @@ html, body {
     /* Mobile Menu Toggle & Nav */
     .menu-toggle {
         display: flex;
+        margin-left: auto !important;
     }
     
     .nav {
@@ -533,8 +537,6 @@ html, body {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
 }
 
 .filter-btn:hover {
@@ -919,7 +921,7 @@ html, body {
 .theme-toggle {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #a0a0a0; /* Gray in dark mode */
+    color: #a0a0a0;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -928,8 +930,12 @@ html, body {
     height: 36px;
     border-radius: 50%;
     transition: all 0.3s ease;
-    margin-left: 16px;
-    margin-right: auto;
+    margin-left: 16px !important;
+    margin-right: 0 !important;
+    position: relative;
+    z-index: 101;
+    pointer-events: auto;
+    flex-shrink: 0;
 }
 .theme-toggle:hover {
     color: #ffffff;
@@ -947,9 +953,21 @@ html, body {
     border-color: rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 1024px) {
-    .theme-toggle {
-        margin-left: 16px;
-        margin-right: auto;
-    }
+
+
+
+/* Fix SVG colors in light mode */
+:root[data-theme="light"] .direction-icon svg {
+    stroke: #000 !important;
+    color: #000 !important;
+}
+
+:root[data-theme="light"] .direction-card { background: #ffffff; }
+
+:root[data-theme="light"] .direction-icon { background: #ffffff; }
+
+/* Force white icons in dark theme */
+.direction-icon svg {
+    stroke: #ffffff;
+    color: #ffffff;
 }
