@@ -2,7 +2,7 @@
    Global Variables
    ========================================================================== */
 :root {
-    --bg-color: #050505;
+    --bg-color: #000000;
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --border-color: rgba(255, 255, 255, 0.1);
@@ -80,7 +80,7 @@ html, body {
 .header-inner {
     display: flex;
     position: relative;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     height: 80px;
 }
@@ -100,6 +100,7 @@ html, body {
 
 .nav {
     display: flex;
+    margin-left: auto;
     align-items: center;
     gap: 32px;
 }
@@ -929,7 +930,6 @@ html, body {
     border-radius: 50%;
     transition: all 0.3s ease;
     margin-left: 16px;
-    margin-right: auto;
 }
 .theme-toggle:hover {
     color: #ffffff;
@@ -950,6 +950,11 @@ html, body {
 @media (max-width: 1024px) {
     .theme-toggle {
         margin-left: 16px;
-        margin-right: auto;
     }
+}
+
+
+/* Fix SVG colors in light mode */
+:root[data-theme="light"] .direction-icon svg {
+    stroke: #000 !important;
 }
