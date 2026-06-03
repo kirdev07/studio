@@ -80,10 +80,10 @@ html, body {
 .header-inner {
     display: flex;
     position: relative;
-    justify-content: flex-start;
+    justify-content: flex-start !important;
     align-items: center;
     height: 80px;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .logo {
@@ -93,6 +93,7 @@ html, body {
     color: var(--text-primary);
     letter-spacing: -0.5px;
     z-index: 101;
+    display: inline-block;
 }
 .logo span {
     color: var(--text-secondary);
@@ -421,7 +422,7 @@ html, body {
     /* Mobile Menu Toggle & Nav */
     .menu-toggle {
         display: flex;
-        margin-left: auto;
+        margin-left: auto !important;
     }
     
     .nav {
@@ -920,7 +921,7 @@ html, body {
 .theme-toggle {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #a0a0a0; /* Gray in dark mode */
+    color: #a0a0a0;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -929,9 +930,12 @@ html, body {
     height: 36px;
     border-radius: 50%;
     transition: all 0.3s ease;
-    margin-left: 16px;
+    margin-left: 16px !important;
+    margin-right: 0 !important;
     position: relative;
-    z-index: 1001;
+    z-index: 101;
+    pointer-events: auto;
+    flex-shrink: 0;
 }
 .theme-toggle:hover {
     color: #ffffff;
