@@ -13,15 +13,15 @@ const PROGRAMS = [
       "Управление мультимедиа: Пауза/Воспроизведение, регулировка звука и переключение треков."
     ],
     "screenshots": [
-      "static/images/Pulse_PC/main.png",
-      "static/images/Pulse_PC/add_programs.png",
-      "static/images/Pulse_PC/console.png",
-      "static/images/Pulse_PC/token_admin.png",
-      "static/images/Pulse_PC/tray.png"
+      "./static/images/Pulse_PC/main.png",
+      "./static/images/Pulse_PC/add_programs.png",
+      "./static/images/Pulse_PC/console.png",
+      "./static/images/Pulse_PC/token_admin.png",
+      "./static/images/Pulse_PC/tray.png"
     ],
     "version": "1.0.0",
     "link": "https://github.com/kirya07kz/Pulse-PC/releases/download/pc/Pulse.PC.Setup.exe",
-    "cover_image": "static/images/Pulse_PC/main.png",
+    "cover_image": "./static/images/Pulse_PC/main.png",
     "category": "ПК",
     "download_count": 0
   },
@@ -38,20 +38,20 @@ const PROGRAMS = [
       "⚙️ Управление: Удобный редактор правил, живой лог событий с подсветкой, детальная статистика и дизайн Material 3 с темной темой."
     ],
     "screenshots": [
-      "static/images/Kiro_Bot/main.jpg",
-      "static/images/Kiro_Bot/2.jpg",
-      "static/images/Kiro_Bot/3.jpg",
-      "static/images/Kiro_Bot/4.jpg",
-      "static/images/Kiro_Bot/5.jpg",
-      "static/images/Kiro_Bot/6.jpg",
-      "static/images/Kiro_Bot/7.jpg",
-      "static/images/Kiro_Bot/8.jpg",
-      "static/images/Kiro_Bot/9.jpg",
-      "static/images/Kiro_Bot/10.jpg"
+      "./static/images/Kiro_Bot/main.jpg",
+      "./static/images/Kiro_Bot/2.jpg",
+      "./static/images/Kiro_Bot/3.jpg",
+      "./static/images/Kiro_Bot/4.jpg",
+      "./static/images/Kiro_Bot/5.jpg",
+      "./static/images/Kiro_Bot/6.jpg",
+      "./static/images/Kiro_Bot/7.jpg",
+      "./static/images/Kiro_Bot/8.jpg",
+      "./static/images/Kiro_Bot/9.jpg",
+      "./static/images/Kiro_Bot/10.jpg"
     ],
     "version": "2.0.0",
     "link": "https://github.com/kirya07kz/Kiro-BOT-VK-2.00/releases/download/v2.00/app-release.apk",
-    "cover_image": "static/images/Kiro_Bot/main.jpg",
+    "cover_image": "./static/images/Kiro_Bot/main.jpg",
     "category": "Android",
     "download_count": 0
   }

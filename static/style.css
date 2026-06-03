@@ -24,7 +24,7 @@
 
 html, body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color) !important; background: var(--bg-color) !important;
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
@@ -919,8 +919,8 @@ html, body {
 
 /* Theme Toggle Button Styles */
 .theme-toggle {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent !important;
+    border: none;
     color: #a0a0a0;
     cursor: pointer;
     display: flex;
@@ -939,18 +939,19 @@ html, body {
 }
 .theme-toggle:hover {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: transparent;
+    border-color: transparent;
 }
 
 :root[data-theme="light"] .theme-toggle {
     color: #000000; /* Black in light mode */
-    border-color: rgba(0, 0, 0, 0.2);
+    border-color: transparent;
+    background: transparent !important;
 }
 :root[data-theme="light"] .theme-toggle:hover {
     color: #000000;
-    background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.4);
+    background: transparent;
+    border-color: transparent;
 }
 
 
@@ -962,7 +963,7 @@ html, body {
     color: #000 !important;
 }
 
-:root[data-theme="light"] .direction-card { background: #ffffff; }
+:root[data-theme="light"] .direction-card { background: #ffffff !important; }
 
 :root[data-theme="light"] .direction-icon { background: #ffffff; }
 
@@ -970,4 +971,26 @@ html, body {
 .direction-icon svg {
     stroke: #ffffff;
     color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+.direction-card h3 {
+    color: var(--text-primary);
+}
+
+:root[data-theme="light"] .direction-card h3 {
+    color: #000000 !important;
+}
+
+
+:root[data-theme="light"] body {
+    background-color: #f8f9fa !important;
 }
