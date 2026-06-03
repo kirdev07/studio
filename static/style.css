@@ -280,7 +280,7 @@ html, body {
     margin-top: 40px;
 }
 .direction-card {
-    background: var(--glass-bg);
+    background: var(--bg-primary);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 32px 24px;
@@ -300,48 +300,7 @@ html, body {
     width: 48px;
     height: 48px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    border: 1px solid var(--border-color);
-    margin-bottom: 8px;
-}
-.direction-card h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #fff;
-}
-.direction-card p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-/* ==========================================================================
-   Typography - Section Titles
-   ========================================================================== */
-.section-title {
-    font-size: clamp(2rem, 6vw, 2.5rem);
-    font-weight: 800;
-    margin-bottom: 24px;
-    letter-spacing: -1px;
-}
-
-/* ==========================================================================
-   Portfolio Section - Program cards grid
-   ========================================================================== */
-.portfolio {
-    padding: 100px 0;
-}
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-}
-.card {
-    background: var(--glass-bg);
+    background: var(--bg-primary);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 32px;
@@ -565,41 +524,7 @@ html, body {
     }
     
     .card, .direction-card {
-        padding: 24px 16px !important;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.75rem;
-        margin-bottom: 16px;
-    }
-    
-    .detail-banner {
-        height: 150px !important;
-    }
-    
-    .detail-card {
-        padding: 20px 16px;
-    }
-}
-
-
-/* ==========================================================================
-   Category Filter Tabs - for programs page filtering
-   ========================================================================== */
-.filter-container {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    background: var(--glass-bg);
+    background: #000000;
     color: var(--text-secondary);
     border: 1px solid var(--border-color);
     padding: 10px 24px;
