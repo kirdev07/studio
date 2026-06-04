@@ -418,7 +418,7 @@ html, body {
 /* ==========================================================================
    Media Queries - Responsive styles for different breakpoints
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     /* Mobile Menu Toggle & Nav */
     .menu-toggle {
         display: flex;
