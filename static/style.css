@@ -25,6 +25,7 @@
 }
 
 html, body {
+    transition: background-color 0.3s ease, color 0.3s ease;
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     background: var(--bg-color);
@@ -116,6 +117,11 @@ html, body {
     font-size: 14px;
     transition: color 0.3s ease;
 }
+.nav a:hover,
+.nav a.active {
+    color: var(--text-primary);
+}
+
 .nav a:hover {
     color: var(--text-primary);
 }
