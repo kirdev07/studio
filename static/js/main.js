@@ -122,14 +122,14 @@ document.addEventListener('DOMContentLoaded', () => {
             counters.forEach(counter => {
                 const updateCount = () => {
                     const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
+                    const count = parseInt(counter.innerText.replace(/\D/g, ''), 10) || 0;
                     const inc = target / speed;
 
                     if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
+                        counter.innerText = Math.ceil(count + inc).toLocaleString('ru-RU');
                         setTimeout(updateCount, 15);
                     } else {
-                        counter.innerText = target + (target > 500 ? '+' : '');
+                        counter.innerText = target.toLocaleString('ru-RU') + (target > 500 ? '+' : '');
                     }
                 };
                 updateCount();

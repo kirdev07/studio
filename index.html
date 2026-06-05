@@ -26,7 +26,7 @@
     <meta property="og:url" content="https://kirya07kz.github.io/kirdev-studio.github.io/">
     <script>
         (function() {
-            var savedTheme = localStorage.getItem('theme');
+            const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -111,7 +111,7 @@
                         <h2 class="section-title" style="margin-bottom: 8px;">Последний релиз</h2>
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Самая свежая разработка студии</p>
                     </div>
-                    <a href="programs.html" class="btn-secondary" class="btn-secondary d-none d-md-flex">Все программы &rarr;</a>
+                    <a href="programs.html" class="btn-secondary d-none d-md-flex">Все программы &rarr;</a>
                 </div>
 
                 <div class="featured-card">

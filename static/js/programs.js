@@ -184,7 +184,7 @@ async function updateDownloadCounters() {
       const program = PROGRAMS.find(p => p.id === programId);
       if (program) {
         const info = await getInfo(program);
-        counterEl.textContent = info.count;
+        counterEl.textContent = info.count.toLocaleString('ru-RU');
 
         counterEl.classList.remove('skeleton');
 
@@ -226,7 +226,7 @@ async function updateDownloadCounters() {
 
 
       if (detailCounter) {
-        detailCounter.textContent = info.count;
+        detailCounter.textContent = info.count.toLocaleString('ru-RU');
         detailCounter.classList.remove('skeleton');
       }
 
