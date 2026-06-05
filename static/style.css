@@ -2,7 +2,7 @@
    Global Variables
    ========================================================================== */
 :root, [data-theme="dark"] {
-    --bg-color: #121212;
+    --bg-color: #000000;
     --bg-primary: #1e1e1e;
     --text-primary: #e0e0e0;
     --btn-text: #ffffff;
