@@ -113,10 +113,10 @@ async function fetchGithubReleaseInfo(owner, repo, filename) {
 
       const repoUrl = `https://github.com/${owner}/${repo}`;
       const changelog = latestRelease.body || '';
-      return { count, latestVersion, downloadLink, repoUrl, changelog };
+      return { count, latestVersion, downloadLink, repoUrl, changelog, publishedAt: latestRelease.published_at };
     }
 
-    return { count, latestVersion: null, downloadLink: null, repoUrl: null, changelog: null };
+    return { count, latestVersion: null, downloadLink: null, repoUrl: null, changelog: null, publishedAt: null };
   } catch (e) {
     console.error('Ошибка получения статистики с GitHub API:', e);
     return null;
@@ -159,6 +159,7 @@ async function updateDownloadCounters() {
         link: info.downloadLink || program.link,
         repoUrl: info.repoUrl,
         changelog: info.changelog,
+        publishedAt: info.publishedAt,
         timestamp: Date.now()
       };
 
@@ -196,10 +197,27 @@ async function updateDownloadCounters() {
             if (info.count > 200) {
                 tagsContainer.innerHTML += `<span class="badge" style="background: rgba(255, 65, 54, 0.2); color: #ff4136; border: 1px solid rgba(255, 65, 54, 0.3); backdrop-filter: blur(4px);">Популярное</span>`;
             }
-            // Find the maximum ID to dynamically mark the latest program
-            const maxId = Math.max(...PROGRAMS.map(p => p.id));
-            if (program.id === maxId) {
-                 tagsContainer.innerHTML += `<span class="badge" style="background: rgba(36, 161, 222, 0.2); color: #24A1DE; border: 1px solid rgba(36, 161, 222, 0.3); backdrop-filter: blur(4px);">Новинка</span>`;
+
+            // Check if release is within the last 14 days
+            let isNew = false;
+            if (info.publishedAt) {
+                const publishDate = new Date(info.publishedAt);
+                const now = new Date();
+                const diffTime = Math.abs(now - publishDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays <= 14) {
+                    isNew = true;
+                }
+            } else {
+                // Fallback: Find the maximum ID to dynamically mark the latest program
+                const maxId = Math.max(...PROGRAMS.map(p => p.id));
+                if (program.id === maxId) {
+                    isNew = true;
+                }
+            }
+
+            if (isNew) {
+                tagsContainer.innerHTML += `<span class="badge" style="background: rgba(36, 161, 222, 0.2); color: #24A1DE; border: 1px solid rgba(36, 161, 222, 0.3); backdrop-filter: blur(4px);">Новинка</span>`;
             }
         }
 
