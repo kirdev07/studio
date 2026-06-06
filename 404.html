@@ -26,7 +26,7 @@
     <meta property="og:url" content="https://kirya07kz.github.io/kirdev-studio.github.io/404.html">
     <script>
         (function() {
-            var savedTheme = localStorage.getItem('theme');
+            const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 document.documentElement.setAttribute('data-theme', savedTheme);
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
