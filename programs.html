@@ -24,6 +24,9 @@
     <meta property="og:description" content="Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.">
     <meta property="og:image" content="https://kirya07kz.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
     <meta property="og:url" content="https://kirya07kz.github.io/kirdev-studio.github.io/programs.html">
+    <meta property="og:site_name" content="KirDev Studio">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -36,6 +39,7 @@
             }
         })();
     </script>
+    <link rel="manifest" href="./manifest.json">
 </head>
 <body>
     <div class="glow-orb"></div>
@@ -51,7 +55,7 @@
                 </button>
             </div>
 
-            <button class="menu-toggle" id="mobile-menu">
+            <button class="menu-toggle" aria-label="Открыть меню" id="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>

@@ -240,6 +240,24 @@ async function updateDownloadCounters() {
     const program = PROGRAMS.find(p => p.id === programId);
 
     if (program) {
+      document.title = `${program.name} - KirDev Studio`;
+
+      // Update Open Graph tags for better social sharing
+      const ogTitle = document.getElementById('og-title');
+      const ogDesc = document.getElementById('og-desc');
+      const ogImg = document.getElementById('og-img');
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+
+      if (ogTitle) ogTitle.content = `${program.name} - KirDev Studio`;
+      if (ogDesc) ogDesc.content = program.description;
+      if (ogImg && program.image) {
+          const baseUrl = window.location.origin + window.location.pathname.replace('program_detail.html', '');
+          ogImg.content = baseUrl + program.image.replace('./', '');
+      }
+      if (twitterTitle) twitterTitle.content = `${program.name} - KirDev Studio`;
+      if (twitterDesc) twitterDesc.content = program.description;
+
       const info = await getInfo(program);
 
 
