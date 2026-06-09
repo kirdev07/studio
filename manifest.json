@@ -1,0 +1,17 @@
+{
+  "name": "KirDev Studio",
+  "short_name": "KirDev",
+  "description": "Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio.",
+  "start_url": "/kirdev-studio.github.io/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "./static/favicon_code.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

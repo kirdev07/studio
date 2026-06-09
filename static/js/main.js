@@ -1,5 +1,41 @@
 
+// --- Toast Notifications ---
+window.showToast = function(message, duration = 3000) {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Remove after duration
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300); // Wait for transition
+    }, duration);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Scroll Progress Bar ---
+    const progressBar = document.createElement('div');
+    progressBar.classList.add('scroll-progress');
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = (scrollTop / scrollHeight) * 100;
+        progressBar.style.width = scrollPercentage + '%';
+    });
+
     // --- Active Nav Link ---
     const currentPath = window.location.pathname;
     document.querySelectorAll('.nav a').forEach(link => {
@@ -235,5 +271,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         total = results.reduce((sum, count) => sum + count, 0);
 
         totalDownloadsEl.setAttribute('data-target', total);
+        totalDownloadsEl.classList.remove('skeleton');
+
+        // Re-trigger animation if the element is already visible
+        const speed = 100;
+        const updateCount = () => {
+            const target = +totalDownloadsEl.getAttribute('data-target');
+            // If the element has a plus, remove it before parsing to int
+            const count = +(totalDownloadsEl.innerText.replace('+', '')) || 0;
+            const inc = target / speed;
+
+            if (count < target) {
+                totalDownloadsEl.innerText = Math.ceil(count + inc);
+                setTimeout(updateCount, 15);
+            } else {
+                totalDownloadsEl.innerText = target + '+';
+            }
+        };
+        updateCount();
     }
 });

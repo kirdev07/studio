@@ -24,6 +24,9 @@
     <meta property="og:description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio. Безопасность и стабильность.">
     <meta property="og:image" content="https://kirya07kz.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
     <meta property="og:url" content="https://kirya07kz.github.io/kirdev-studio.github.io/">
+    <meta property="og:site_name" content="KirDev Studio">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
@@ -36,6 +39,7 @@
             }
         })();
     </script>
+    <link rel="manifest" href="./manifest.json">
 </head>
 <body>
     <div class="glow-orb"></div>
@@ -44,12 +48,12 @@
     <header class="header">
         <div class="container header-inner">
             <a href="index.html" class="logo">KirDev <span>Studio</span></a>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему" data-tooltip="Переключить тему">
                 <svg aria-hidden="true" class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 <svg aria-hidden="true" class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
 
-            <button class="menu-toggle" id="mobile-menu">
+            <button class="menu-toggle" aria-label="Открыть меню" id="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -91,7 +95,7 @@
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Разработано программ</p>
                     </div>
                     <div class="stat-card" style="padding: 24px;">
-                        <h3 class="stat-number" id="total-downloads-stat" data-target="533" style="font-size: 3rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">0</h3>
+                        <h3 class="stat-number skeleton" id="total-downloads-stat" data-target="533" style="font-size: 3rem; font-weight: 800; color: var(--text-primary); margin-bottom: 8px;">0</h3>
                         <p style="color: var(--text-secondary); font-size: 1.1rem;">Общих скачиваний</p>
                     </div>
                     <div class="stat-card" style="padding: 24px;">
