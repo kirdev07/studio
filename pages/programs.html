@@ -57,7 +57,7 @@
     </header>
 
     <main>
-        <section class="portfolio" style="padding-top: 150px; min-height: 80vh;">
+        <section class="portfolio" style="padding-top: clamp(100px, 15vw, 150px); min-height: 80vh;">
             <div class="container">
                 <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">Наши Разработки</h2>
                 <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -182,18 +182,18 @@
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                card.style.padding = '40px';
+                card.style.padding = 'clamp(24px, 5vw, 40px)';
                 card.style.background = 'transparent';
                 card.style.border = '1px solid rgba(255,255,255,0.1)';
                 card.style.borderRadius = '0';
 
                 card.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
-                        <h3 style="font-size: 2rem; font-weight: 800; margin: 0; letter-spacing: -1px;">${p.name}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+                        <h3 style="font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800; margin: 0; letter-spacing: -1px; word-break: break-word;">${p.name}</h3>
                         <div class="status-tags" style="display: flex; gap: 8px;"></div>
                     </div>
                     
-                    <div style="display: flex; gap: 16px; margin-bottom: 24px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 24px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; flex-wrap: wrap; align-items: center;">
                         <span style="display: flex; align-items: center; gap: 6px;">
                             ${getPlatformIcon(p.category)}
                             ${p.category}

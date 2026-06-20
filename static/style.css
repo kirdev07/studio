@@ -97,15 +97,17 @@
 html {
     background-color: var(--bg-color);
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
-    
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
     position: relative;
     margin: 0;
 }
@@ -217,7 +219,7 @@ body {
     height: 2px;
     background: var(--text-primary);
     border-radius: 2px;
-    
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* ==========================================================================
@@ -245,9 +247,6 @@ body {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     
 }
-.btn-primary:active {
-    
-}
 
 .btn-secondary {
     background: transparent;
@@ -266,9 +265,6 @@ body {
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.3);
-    
-}
-.btn-secondary:active {
     
 }
 
@@ -329,30 +325,9 @@ body {
     margin-bottom: 40px;
     text-align: left;
 }
-.hero-image {
-    width: 100%;
-    max-width: 650px;
-    margin: 0 auto;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    
-}
-.hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 
-@keyframes floating-img {
-    0%, 100% {
-        
-    }
-    50% {
-        
-    }
-}
+
+
 
 /* ==========================================================================
    Directions Section - "What we do" grid and cards
@@ -431,37 +406,7 @@ body {
     gap: 24px;
     margin-top: 40px;
 }
-.card {
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 32px 24px;
-    
-    background: var(--bg-primary);
-    
-    -webkit-
-    display: flex;
-    flex-direction: column;
-}
-.card:hover {
-    
-    border-color: rgba(255,255,255,0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.card:hover .card-cover img {
-    
-}
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-    gap: 12px;
-}
-.card-header h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    word-break: break-word;
-}
+
 .badge {
     background: rgba(255,255,255,0.1);
     padding: 4px 10px;
@@ -471,11 +416,7 @@ body {
     color: var(--text-secondary);
     white-space: nowrap;
 }
-.card-desc {
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-    flex-grow: 1;
-}
+
 
 /* ==========================================================================
    Program Detail Page - specific styles for individual program view
@@ -579,13 +520,13 @@ body {
     }
     
     .menu-toggle.active span:nth-child(1) {
-        
+        transform: translateY(8px) rotate(45deg);
     }
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
     }
     .menu-toggle.active span:nth-child(3) {
-        
+        transform: translateY(-8px) rotate(-45deg);
     }
     .hero-grid {
         gap: 30px;
@@ -628,11 +569,7 @@ body {
         justify-content: center;
     }
 
-    /* Program detail banner & carousel responsiveness */
-    .detail-banner {
-        height: 200px ;
-        margin-bottom: 24px ;
-    }
+
     .detail-header {
         margin-bottom: 30px ;
         flex-direction: column;
@@ -704,8 +641,6 @@ body {
     outline: none;
     
     z-index: 1010;
-    
-    -webkit-
 }
 
 .lightbox-btn:hover {
@@ -714,9 +649,6 @@ body {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
-.lightbox-btn:active {
-    
-}
 
 #lightbox-prev {
     left: 24px;
@@ -742,11 +674,6 @@ body {
 /* ==========================================================================
    Carousel - Screenshot carousel on detail page
    ========================================================================== */
-.carousel-btn {
-    
-    
-    -webkit-
-}
 
 .carousel-btn:hover {
     background: rgba(255, 255, 255, 0.15) ;
@@ -754,9 +681,6 @@ body {
     
 }
 
-.carousel-dot {
-    
-}
 
 .carousel-dot.active {
     background: #fff ;
@@ -814,8 +738,6 @@ body {
     
     
     z-index: 999;
-    
-    -webkit-
 }
 
 #scroll-to-top.visible {
@@ -932,29 +854,8 @@ body {
         height: 44px;
     }
 
-    .featured-card {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .featured-content {
-        padding: 30px 20px;
-    }
-
-    .featured-image {
-        height: 250px;
-        min-height: auto;
-        order: -1;
-    }
-}
 
 
-.card-cover:hover .card-overlay {
-    opacity: 1 ;
-}
-.card-cover:hover .card-overlay span {
-    
-}
 
 .hero-actions {
     display: flex;
@@ -1102,18 +1003,11 @@ body {
     background-clip: text;
 }
 
-[data-theme="light"] .hero-image,
 [data-theme="light"] .screenshot-img {
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
 }
 
-[data-theme="light"] .card-overlay {
-    background: rgba(255,255,255,0.7) ;
-}
-[data-theme="light"] .card-overlay .btn-primary {
-    background: var(--btn-primary-bg);
-    color: var(--btn-text);
-}
+
 
 [data-theme="light"] .filter-btn {
     background: var(--glass-bg);
@@ -1233,9 +1127,7 @@ body.page-loaded {
     opacity: 1;
 }
 
-.hero-image img {
-    filter: grayscale(100%) contrast(1.1);
-}
+
 
 
 /* Strip hovers */

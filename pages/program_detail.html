@@ -193,7 +193,7 @@
                 </a>
 
                 <div style="margin-bottom: 60px;">
-                    <h1 style="font-size: 4rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px;">${program.name}</h1>
+                    <h1 style="font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; word-break: break-word;">${program.name}</h1>
                     
                     <div style="display: flex; gap: 16px; margin-bottom: 40px; color: var(--text-secondary); font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; flex-wrap: wrap; align-items: center;">
                         <span class="version-badge skeleton" style="color: var(--text-primary);">v${program.version}</span>
@@ -206,7 +206,7 @@
                         </span>
                     </div>
 
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <div class="detail-actions-wrapper" style="display: flex; gap: 16px; flex-wrap: wrap;">
                         <a href="${downloadUrl}" ${linkAttributes} style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; background: #ffffff; color: #000000; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: opacity 0.2s; border: none;">
                             <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             Скачать безопасно
