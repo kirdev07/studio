@@ -24,8 +24,6 @@ window.showToast = function(message, duration = 3000) {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Плавное появление страницы
-    document.body.classList.add('page-loaded');
     // --- Active Nav Link ---
     const currentPath = window.location.pathname;
     document.querySelectorAll('.nav a').forEach(link => {
@@ -63,57 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
         trigger.addEventListener('click', () => {
             const faqItem = trigger.parentElement;
             const content = trigger.nextElementSibling;
-            const icon = trigger.querySelector('svg');
-
             const isActive = faqItem.classList.toggle('active');
+            faqItem.classList.toggle('is-open', isActive);
 
             if (isActive) {
                 content.style.maxHeight = content.scrollHeight + 'px';
-                if (icon) {
-                    icon.style.transform = 'rotate(180deg)';
-                    icon.style.color = '#fff';
-                }
-                faqItem.style.borderColor = 'rgba(255,255,255,0.3)';
-                faqItem.style.boxShadow = '0 10px 30px rgba(255,255,255,0.02)';
             } else {
                 content.style.maxHeight = '0';
-                if (icon) {
-                    icon.style.transform = 'rotate(0deg)';
-                    icon.style.color = 'var(--text-secondary)';
-                }
-                faqItem.style.borderColor = 'var(--border-color)';
-                faqItem.style.boxShadow = 'none';
             }
         });
     });
-
-    // --- Theme Toggle ---
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        const sunIcon = themeToggle.querySelector('.sun-icon');
-        const moonIcon = themeToggle.querySelector('.moon-icon');
-
-        const updateIcons = () => {
-            if (document.documentElement.getAttribute('data-theme') === 'light') {
-                if (sunIcon) sunIcon.style.display = 'none';
-                if (moonIcon) moonIcon.style.display = 'block';
-            } else {
-                if (sunIcon) sunIcon.style.display = 'block';
-                if (moonIcon) moonIcon.style.display = 'none';
-            }
-        };
-
-        updateIcons();
-
-        themeToggle.addEventListener('click', () => {
-            let currentTheme = document.documentElement.getAttribute('data-theme');
-            let newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcons();
-        });
-    }
 
     // --- Scroll to Top ---
     const scrollToTopBtn = document.getElementById('scroll-to-top');
@@ -141,31 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
         "color: #aaaaaa; font-size: 14px; margin-top: 10px;"
     );
 
-    // --- Animations & Stats ---
+    // --- Stats ---
     const counters = document.querySelectorAll('.stat-number');
     if (counters.length > 0) {
-        const speed = 200;
-
-        const animateCounters = () => {
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                counter.innerText = target + (target > 500 ? '+' : '');
-            });
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.disconnect();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const statsSection = document.querySelector('.stats-grid');
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
+        counters.forEach(counter => {
+            const target = Number(counter.getAttribute('data-target')) || 0;
+            counter.innerText = target + (target > 500 ? '+' : '');
+        });
     }
 
 
@@ -186,7 +125,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const cachedStr = localStorage.getItem(cacheKey);
                     if (cachedStr) {
                         const cached = JSON.parse(cachedStr);
-                        if (cached.timestamp && (Date.now() - cached.timestamp < 3600000)) {
+                        const cacheTtl = typeof RELEASE_CACHE_TTL !== 'undefined' ? RELEASE_CACHE_TTL : 5 * 60 * 1000;
+                        if (cached.timestamp && (Date.now() - cached.timestamp < cacheTtl)) {
                             cachedCount = cached.count;
                         }
                     }
@@ -197,13 +137,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 if (typeof fetchGithubReleaseInfo === 'function') {
-                    const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
+                    const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename, p.assetPattern);
                     if (info) {
                         try {
                             localStorage.setItem(cacheKey, JSON.stringify({
                                 count: info.count,
                                 version: info.latestVersion,
+                                link: info.downloadLink || p.link,
+                                repoUrl: info.repoUrl,
                                 changelog: info.changelog,
+                                publishedAt: info.publishedAt,
                                 timestamp: Date.now()
                             }));
                         } catch (e) {}

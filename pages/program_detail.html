@@ -23,7 +23,7 @@
     <meta property="og:title" id="og-title" content="Скачать бесплатно на KirDev Studio">
     <meta property="og:description" id="og-desc" content="Надежные и безопасные программы для ваших задач от KirDev Studio.">
     <meta property="og:image" id="og-img" content="https://kirdev07.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
-    <meta property="og:url" content="https://kirdev07.github.io/kirdev-studio.github.io/pages/program_detail.html">
+    <meta property="og:url" id="og-url" content="https://kirdev07.github.io/kirdev-studio.github.io/pages/program_detail.html">
     <meta property="og:site_name" content="KirDev Studio">
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -47,12 +47,12 @@
     <link rel="manifest" href="../static/js/manifest.json">
 </head>
 <body>
-    <div class="glow-orb"></div>
-    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
     
     <header class="header">
         <div class="container header-inner">
-            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 4px;">
+            <div class="logo-wrapper">
                 <a href="../index.html" class="logo">KirDev <span>Studio</span></a>
 
             </div>
@@ -73,21 +73,19 @@
     </header>
 
     <main>
-        <section style="padding-top: 150px; padding-bottom: 100px;">
-            <div class="container" style="max-width: 900px;" id="detail-container">
+        <section class="detail-page-section">
+            <div class="container detail-container" id="detail-container">
                 <!-- Будет загружено динамически через JS -->
-                 <div style="text-align: center; padding: 100px 0; color: var(--text-secondary);">
+                 <div class="detail-loading">
                      <p>Загрузка информации о программе...</p>
                  </div>
             </div>
         </section>
 
         <!-- Lightbox Overlay (Full Screen) -->
-        <div id="lightbox"
-            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 1000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+        <div id="lightbox" class="lightbox">
             <!-- Close Button -->
-            <button id="lightbox-close" aria-label="Закрыть галерею"
-                style="position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--text-primary); cursor: pointer; font-size: 2.5rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; outline: none; transition: transform 0.2s ease; z-index: 1010;">&times;</button>
+            <button id="lightbox-close" class="lightbox-close" aria-label="Закрыть галерею">&times;</button>
 
             <!-- Prev Button -->
             <button id="lightbox-prev" class="lightbox-btn" aria-label="Предыдущий скриншот">
@@ -98,10 +96,9 @@
             </button>
 
             <!-- Image Wrapper for smooth transitions -->
-            <div
-                style="position: relative; width: 92%; height: 88%; display: flex; align-items: center; justify-content: center;">
+            <div class="lightbox-frame">
                 <img loading="lazy" id="lightbox-img" src="" alt="Увеличенный скриншот"
-                    style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease; cursor: pointer;">
+                    class="lightbox-img">
             </div>
 
             <!-- Next Button -->
@@ -129,7 +126,7 @@
     </footer>
 
     <!-- Подключаем базу программ -->
-    <script src="../static/js/programs.js?v=2.1"></script>
+    <script src="../static/js/programs.js?v=2.2"></script>
 
     <script>
         // Загрузка деталей
@@ -178,7 +175,7 @@
             // Генерируем разметку
             let featuresHtml = '';
             program.features.forEach(f => {
-                featuresHtml += `<li style="margin-bottom: 8px;">${f}</li>`;
+                featuresHtml += `<li>${f}</li>`;
             });
 
             const isExternal = program.link.startsWith('http://') || program.link.startsWith('https://');
@@ -188,78 +185,75 @@
                 : 'download';
 
             container.innerHTML = `
-                <a href="programs.html" style="color: var(--text-secondary); text-decoration: none; display: inline-block; margin-bottom: 60px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;">
+                <a href="programs.html" class="detail-back-link">
                     &larr; Назад к разработкам
                 </a>
 
-                <div style="margin-bottom: 60px;">
-                    <h1 style="font-size: clamp(2rem, 8vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; word-break: break-word;">${program.name}</h1>
+                <div class="detail-hero-block">
+                    <h1 class="detail-title-main">${program.name}</h1>
                     
-                    <div style="display: flex; gap: 16px; margin-bottom: 40px; color: var(--text-secondary); font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; flex-wrap: wrap; align-items: center;">
-                        <span class="version-badge skeleton" style="color: var(--text-primary);">v${program.version}</span>
+                    <div class="detail-meta">
+                        <span class="version-badge skeleton detail-version">v${program.version}</span>
                         <span>•</span>
                         <span>${program.category}</span>
                         <span>•</span>
-                        <span style="display: flex; align-items: center; gap: 6px;">
+                        <span class="icon-label">
                             <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             <span id="detail-download-counter" class="skeleton">${program.download_count}</span> скачиваний
                         </span>
                     </div>
 
-                    <div class="detail-actions-wrapper" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <a href="${downloadUrl}" ${linkAttributes} style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; background: #ffffff; color: #000000; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: opacity 0.2s; border: none;">
-                            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <div class="detail-actions-wrapper">
+                        <a href="${downloadUrl}" ${linkAttributes} class="download-btn detail-download-btn detail-action-btn">
+                            <svg class="icon-spaced" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             Скачать безопасно
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="repo-btn" style="display: none; align-items: center; justify-content: center; padding: 16px 40px; background: transparent; color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2); font-weight: 600; font-size: 1.1rem; text-decoration: none; transition: background 0.2s;">
-                            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="repo-btn">
+                            <svg class="icon-spaced" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             Исходный код
                         </a>
-                        <button id="share-btn" style="display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; background: transparent; color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2); font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: background 0.2s;">
-                            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        <button id="share-btn" class="share-btn">
+                            <svg class="icon-spaced" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                             <span id="share-text">Поделиться</span>
                         </button>
                     </div>
                 </div>
 
-                <div style="margin-bottom: 80px; padding-top: 60px; border-top: 1px solid rgba(255,255,255,0.1);">
-                    <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -1px;">О разработке</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.25rem; line-height: 1.6; margin-bottom: 40px; max-width: 800px;">
+                <div class="detail-section">
+                    <h2 class="detail-section-title">О разработке</h2>
+                    <p class="detail-description">
                         ${program.full_description}
                     </p>
 
-                    <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.5px;">Ключевые возможности:</h3>
-                    <ul style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; list-style-position: outside; padding-left: 20px; margin-bottom: 0; max-width: 800px;">
+                    <h3 class="detail-subtitle">Ключевые возможности:</h3>
+                    <ul class="feature-list">
                         ${featuresHtml}
                     </ul>
 
-                    <div class="changelog-section" style="display: none; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 24px; letter-spacing: -0.5px;">Что нового</h3>
-                        <div class="changelog-content" style="font-family: monospace; font-size: 1rem; color: var(--text-secondary); white-space: pre-wrap; line-height: 1.6;">
+                    <div class="changelog-section">
+                        <h3 class="changelog-title">Что нового</h3>
+                        <div class="changelog-content">
                         </div>
                     </div>
                 </div>
 
                 <!-- Скриншоты в виде единого слайдера (Карусели) -->
-                <h2 style="font-size: 1.5rem; margin-bottom: 24px;">Скриншоты</h2>
-                <div class="screenshots-carousel"
-                    style="position: relative; width: 100%; max-width: 100%; margin: 0 auto; aspect-ratio: 16/9; border-radius: 16px; border: 1px solid var(--border-color); overflow: hidden; background: #0a0a0a; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                <h2 class="screenshots-title">Скриншоты</h2>
+                <div class="screenshots-carousel">
 
                     <!-- Slides Container -->
-                    <div class="carousel-slides" id="carousel-slides" style="width: 100%; height: 100%; display: flex; position: relative;">
+                    <div class="carousel-slides" id="carousel-slides">
                         <!-- Будет заполнено через JS -->
                     </div>
 
                     <!-- Navigation Buttons (In-page) -->
-                    <button class="carousel-btn prev" aria-label="Предыдущий слайд"
-                        style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; outline: none; z-index: 10;">
+                    <button class="carousel-btn prev" aria-label="Предыдущий слайд">
                         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                             stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="15 18 9 12 15 6"></polyline>
                         </svg>
                     </button>
-                    <button class="carousel-btn next" aria-label="Следующий слайд"
-                        style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); cursor: pointer; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; outline: none; z-index: 10;">
+                    <button class="carousel-btn next" aria-label="Следующий слайд">
                         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                             stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
@@ -267,20 +261,19 @@
                     </button>
 
                     <!-- Dots (In-page) -->
-                    <div class="carousel-dots" id="carousel-dots"
-                        style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10;">
+                    <div class="carousel-dots" id="carousel-dots">
                         <!-- Будет заполнено через JS -->
                     </div>
                 </div>
 
                 <!-- Feedback Community Banner -->
-                <div style="margin-top: 60px; padding: 32px; border-radius: 16px; background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid var(--border-color); text-align: center;">
-                    <h3 style="font-size: 1.3rem; margin-bottom: 12px;">Нашли баг или есть идея?</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto;">
+                <div class="feedback-banner">
+                    <h3 class="feedback-title">Нашли баг или есть идея?</h3>
+                    <p class="feedback-copy">
                         Мы — хобби-студия, и нам очень важен фидбек. Напишите нам в Telegram, если у вас есть предложения по улучшению программы или вы столкнулись с проблемой.
                     </p>
-                    <a href="https://t.me/kirdev_studio?direct" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="display: inline-flex; justify-content: center;">
-                        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <a href="https://t.me/kirdev_studio?direct" target="_blank" rel="noopener noreferrer" class="btn-secondary telegram-feedback-link">
+                        <svg class="icon-spaced" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                         Написать в Telegram
                     </a>
                 </div>
@@ -294,23 +287,14 @@
                 program.screenshots.forEach((shot, index) => {
                     // Создаем слайд
                     const slide = document.createElement('div');
-                    slide.className = 'carousel-slide';
-                    slide.style.width = '100%';
-                    slide.style.height = '100%';
-                    slide.style.flexShrink = '0';
-                    slide.style.display = index === 0 ? 'flex' : 'none';
-                    slide.style.alignItems = 'center';
-                    slide.style.justifyContent = 'center';
-                    slide.style.position = 'relative';
+                    slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
                     slide.innerHTML = `
                         <img loading="lazy" src="${shot.replace('./', '../')}" alt="Скриншот ${program.name}"
-                            style="width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.3s ease;"
                             class="screenshot-img"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="screenshot-fallback"
-                            style="display: none; flex-direction: column; align-items: center; justify-content: center; color: #444; font-size: 0.9rem; text-align: center; padding: 20px;">
+                            onerror="this.classList.add('is-hidden'); this.nextElementSibling.classList.add('is-visible');">
+                        <div class="screenshot-fallback">
                             <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;">
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="screenshot-fallback-icon">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
                                 <polyline points="21 15 16 10 5 21"></polyline>
@@ -324,26 +308,15 @@
                     const dot = document.createElement('span');
                     dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
                     dot.setAttribute('data-index', index);
-                    dot.style.width = index === 0 ? '20px' : '8px';
-                    dot.style.height = '8px';
-                    dot.style.borderRadius = index === 0 ? '4px' : '50%';
-                    dot.style.background = index === 0 ? '#fff' : 'rgba(255, 255, 255, 0.3)';
-                    dot.style.cursor = 'pointer';
-                    dot.style.transition = 'all 0.2s ease';
                     dotsContainer.appendChild(dot);
                 });
             } else {
                 // Если скриншотов нет вообще
                 const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                slide.style.width = '100%';
-                slide.style.height = '100%';
-                slide.style.display = 'flex';
-                slide.style.alignItems = 'center';
-                slide.style.justifyContent = 'center';
+                slide.className = 'carousel-slide active';
                 slide.innerHTML = `
-                    <div class="screenshot-fallback" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; font-size: 0.9rem; text-align: center; padding: 20px;">
-                        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    <div class="screenshot-fallback is-visible">
+                        <svg class="screenshot-fallback-icon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                         <span>Скриншот скоро появится</span>
                     </div>
                 `;
@@ -407,21 +380,11 @@
                 }
 
                 carouselSlides.forEach((slide, idx) => {
-                    slide.style.display = idx === carouselIndex ? 'flex' : 'none';
+                    slide.classList.toggle('active', idx === carouselIndex);
                 });
 
                 carouselDots.forEach((dot, idx) => {
-                    if (idx === carouselIndex) {
-                        dot.classList.add('active');
-                        dot.style.background = '#fff';
-                        dot.style.width = '20px';
-                        dot.style.borderRadius = '4px';
-                    } else {
-                        dot.classList.remove('active');
-                        dot.style.background = 'rgba(255, 255, 255, 0.3)';
-                        dot.style.width = '8px';
-                        dot.style.borderRadius = '50%';
-                    }
+                    dot.classList.toggle('active', idx === carouselIndex);
                 });
             };
 
@@ -429,10 +392,10 @@
             showCarouselImage(0);
 
             if (carouselSlides.length <= 1) {
-                if (carouselPrev) carouselPrev.style.display = 'none';
-                if (carouselNext) carouselNext.style.display = 'none';
+                if (carouselPrev) carouselPrev.classList.add('is-hidden');
+                if (carouselNext) carouselNext.classList.add('is-hidden');
                 const dotsContainer = document.querySelector('.carousel-dots');
-                if (dotsContainer) dotsContainer.style.display = 'none';
+                if (dotsContainer) dotsContainer.classList.add('is-hidden');
             }
 
             if (carouselPrev) {
@@ -487,7 +450,7 @@
 
             // Лайтбокс
             const screenshots = Array.from(document.querySelectorAll('.screenshot-img'))
-                .filter(img => img.style.display !== 'none')
+                .filter(img => !img.classList.contains('is-hidden'))
                 .map(img => img.src);
             let currentIndex = 0;
 
@@ -504,28 +467,28 @@
 
                 showCarouselImage(currentIndex);
 
-                lightboxImg.style.opacity = '0';
-                lightboxImg.style.transform = 'scale(0.98)';
+                lightboxImg.classList.remove('is-loaded');
+                lightboxImg.classList.add('is-switching');
 
                 setTimeout(() => {
                     lightboxImg.src = screenshots[currentIndex];
-                    lightboxImg.style.opacity = '1';
-                    lightboxImg.style.transform = 'scale(1)';
+                    lightboxImg.classList.remove('is-switching');
+                    lightboxImg.classList.add('is-loaded');
                 }, 150);
 
                 if (screenshots.length <= 1) {
-                    prevBtn.style.display = 'none';
-                    nextBtn.style.display = 'none';
+                    prevBtn.classList.add('is-hidden');
+                    nextBtn.classList.add('is-hidden');
                 } else {
-                    prevBtn.style.display = 'flex';
-                    nextBtn.style.display = 'flex';
+                    prevBtn.classList.remove('is-hidden');
+                    nextBtn.classList.remove('is-hidden');
                 }
             };
 
             document.querySelectorAll('.screenshot-img').forEach((img) => {
                 img.addEventListener('click', () => {
                     const activeScreenshots = Array.from(document.querySelectorAll('.screenshot-img'))
-                        .filter(i => i.style.display !== 'none')
+                        .filter(i => !i.classList.contains('is-hidden'))
                         .map(i => i.src);
 
                     const activeIndex = activeScreenshots.indexOf(img.src);
@@ -533,20 +496,20 @@
                     screenshots.length = 0;
                     screenshots.push(...activeScreenshots);
 
-                    lightbox.style.display = 'flex';
+                    lightbox.classList.add('is-open');
                     showImage(activeIndex);
 
                     setTimeout(() => {
-                        lightbox.style.opacity = '1';
+                        lightbox.classList.add('is-visible');
                     }, 10);
                 });
             });
 
             const closeLightbox = () => {
-                lightbox.style.opacity = '0';
-                lightboxImg.style.transform = 'scale(0.95)';
+                lightbox.classList.remove('is-visible');
+                lightboxImg.classList.remove('is-loaded');
                 setTimeout(() => {
-                    lightbox.style.display = 'none';
+                    lightbox.classList.remove('is-open');
                 }, 300);
             };
 
@@ -576,7 +539,7 @@
             });
 
             document.addEventListener('keydown', (e) => {
-                if (lightbox.style.display === 'flex') {
+                if (lightbox.classList.contains('is-open')) {
                     if (e.key === 'Escape') {
                         closeLightbox();
                     } else if (e.key === 'ArrowLeft') {
@@ -594,7 +557,7 @@
         <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
 
-    <script src="../static/js/main.js"></script>
+    <script src="../static/js/main.js?v=1.1"></script>
 
 </body>
 

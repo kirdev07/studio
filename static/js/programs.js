@@ -26,11 +26,14 @@ const PROGRAMS = [
     ],
     "version": "2.0.0",
     "link": "https://github.com/kirdev07/Kiro-BOT-VK-2.00/releases/download/v2.00/app-release.apk",
+    "assetPattern": ".apk",
     "cover_image": "./static/images/Kiro_Bot/main.jpg",
     "category": "Android",
     "download_count": 0
   }
 ];
+
+const RELEASE_CACHE_TTL = 5 * 60 * 1000;
 
 // Функция для парсинга ссылки на GitHub Release
 function parseGithubReleaseUrl(url) {
@@ -48,7 +51,7 @@ function parseGithubReleaseUrl(url) {
 }
 
 // Функция для получения информации о релизах (счетчик скачиваний, последняя версия и ссылка)
-async function fetchGithubReleaseInfo(owner, repo, filename) {
+async function fetchGithubReleaseInfo(owner, repo, filename, assetPattern = null) {
   try {
     const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
     if (!response.ok) return null;
@@ -58,10 +61,12 @@ async function fetchGithubReleaseInfo(owner, repo, filename) {
     // Подсчет общего количества скачиваний
     releases.forEach(release => {
       if (release.assets) {
-        release.assets.forEach(asset => {
-          if (asset.name === filename) {
-            count += asset.download_count;
-          }
+        const exactAsset = release.assets.find(asset => asset.name === filename);
+        const patternAsset = assetPattern ? release.assets.find(asset => asset.name.toLowerCase().endsWith(assetPattern.toLowerCase())) : null;
+        const assetsToCount = exactAsset ? [exactAsset] : (patternAsset ? [patternAsset] : release.assets);
+
+        assetsToCount.forEach(asset => {
+          count += asset.download_count || 0;
         });
       }
     });
@@ -80,7 +85,7 @@ async function fetchGithubReleaseInfo(owner, repo, filename) {
 
       let downloadLink = null;
       if (latestRelease.assets && latestRelease.assets.length > 0) {
-        const asset = latestRelease.assets.find(a => a.name === filename);
+        const asset = latestRelease.assets.find(a => a.name === filename) || (assetPattern ? latestRelease.assets.find(a => a.name.toLowerCase().endsWith(assetPattern.toLowerCase())) : null) || latestRelease.assets[0];
         if (asset) {
           downloadLink = asset.browser_download_url;
         }
@@ -115,8 +120,7 @@ async function updateDownloadCounters() {
       const cachedDataStr = localStorage.getItem(cacheKey);
       if (cachedDataStr) {
         const cachedData = JSON.parse(cachedDataStr);
-        // Add 1 hour expiration check
-        if (cachedData.timestamp && (Date.now() - cachedData.timestamp < 3600000)) {
+        if (cachedData.timestamp && cachedData.link && (Date.now() - cachedData.timestamp < RELEASE_CACHE_TTL)) {
            program.dynamic_count = cachedData.count + program.download_count;
            return cachedData;
         }
@@ -125,7 +129,7 @@ async function updateDownloadCounters() {
       console.warn('LocalStorage cache read error:', e);
     }
 
-    const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename);
+    const info = await fetchGithubReleaseInfo(ghInfo.owner, ghInfo.repo, ghInfo.filename, program.assetPattern);
     if (info !== null) {
       program.dynamic_count = info.count + program.download_count;
       const result = {
@@ -170,7 +174,7 @@ async function updateDownloadCounters() {
         if (tagsContainer) {
             tagsContainer.innerHTML = '';
             if (info.count > 200) {
-                tagsContainer.innerHTML += `<span class="badge" style="background: rgba(255, 65, 54, 0.2); color: #ff4136; border: 1px solid rgba(255, 65, 54, 0.3); ">Популярное</span>`;
+                tagsContainer.innerHTML += `<span class="badge badge-popular">Популярное</span>`;
             }
 
             // Check if release is within the last 14 days
@@ -192,7 +196,7 @@ async function updateDownloadCounters() {
             }
 
             if (isNew) {
-                tagsContainer.innerHTML += `<span class="badge" style="background: rgba(255, 255, 255, 0.1); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.2); ">Новинка</span>`;
+                tagsContainer.innerHTML += `<span class="badge badge-new">Новинка</span>`;
             }
         }
 
@@ -252,6 +256,15 @@ async function updateDownloadCounters() {
       const downloadBtn = detailContainer.querySelector('.download-btn');
       if (downloadBtn) {
         downloadBtn.href = info.link;
+        downloadBtn.removeAttribute('download');
+        if (info.link.startsWith('http://') || info.link.startsWith('https://')) {
+          downloadBtn.target = '_blank';
+          downloadBtn.rel = 'noopener noreferrer';
+        } else {
+          downloadBtn.removeAttribute('target');
+          downloadBtn.removeAttribute('rel');
+          downloadBtn.setAttribute('download', '');
+        }
       }
 
       // Кнопка исходного кода (GitHub)
@@ -267,7 +280,7 @@ async function updateDownloadCounters() {
         const repoBtn = detailContainer.querySelector('.repo-btn');
         if (repoBtn) {
           repoBtn.href = finalRepoUrl;
-          repoBtn.style.display = 'inline-flex';
+          repoBtn.classList.add('is-visible');
         }
       }
 
@@ -278,7 +291,7 @@ async function updateDownloadCounters() {
         if (changelogSection && changelogContent) {
            // Parse basic markdown from GitHub releases (very basic: handle lists and links if needed, but innerText is safer)
            changelogContent.textContent = info.changelog;
-           changelogSection.style.display = 'block';
+           changelogSection.classList.add('is-visible');
         }
       }
     }
@@ -294,12 +307,12 @@ function renderLatestRelease() {
   const topPrograms = sortedPrograms.slice(0, 2);
 
   if (topPrograms.length > 0) {
-    let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px;">';
+    let html = '<div class="latest-release-grid">';
     
     topPrograms.forEach((program, index) => {
         const badgeText = index === 0 ? 'Новый релиз' : 'Прошлый релиз';
         html += `
-          <a href="pages/program_detail.html?id=${program.id}" class="minimal-release-card" style="max-width: 100%;">
+          <a href="pages/program_detail.html?id=${program.id}" class="minimal-release-card minimal-release-card-full">
               <img src="${program.cover_image}" alt="Обложка ${program.name}" class="minimal-image">
               <div class="minimal-content">
                   <span class="minimal-badge">${badgeText}</span>

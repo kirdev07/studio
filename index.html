@@ -31,12 +31,12 @@
     <link rel="manifest" href="./static/js/manifest.json">
 </head>
 <body>
-    <div class="glow-orb"></div>
-    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
     
     <header class="header">
         <div class="container header-inner">
-            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 4px;">
+            <div class="logo-wrapper">
                 <a href="index.html" class="logo">KirDev <span>Studio</span></a>
 
             </div>
@@ -57,14 +57,23 @@
     </header>
 
     <main>
-        <section class="hero" style="text-align: center; background: radial-gradient(circle at top center, rgba(255,255,255,0.03) 0%, transparent 60%);">
+        <section class="hero radial-hero">
             <div class="container">
-                <div class="hero-text" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center;">
-                    <h1 style="font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 24px; text-align: center;">KirDev Studio</h1>
-                    <p style="font-size: clamp(1rem, 4vw, 1.25rem); line-height: 1.6; margin-bottom: 48px; color: var(--text-secondary); text-align: center; max-width: 650px;">Мы — независимая хобби-студия. Разрабатываем мобильные приложения под Android, ботов для социальных сетей и веб-сайты. Делаем это ради интереса и делимся с вами абсолютно бесплатно.</p>
-                    <div class="hero-actions" style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; width: 100%;">
-                        <a href="pages/programs.html" class="btn-primary lg" style="padding: 16px 40px; font-weight: 700; background: #ffffff; color: #000000; border: none; box-shadow: 0 4px 20px rgba(255,255,255,0.1);">Наши разработки</a>
-                        <a href="#about" class="btn-secondary lg" style="padding: 16px 40px; font-weight: 600;">О нас</a>
+                <div class="hero-text hero-text-centered">
+                    <h1 class="hero-title-main">KirDev Studio</h1>
+                    <p class="hero-lead">Мы — независимая хобби-студия. Разрабатываем мобильные приложения под Android, ботов для социальных сетей и веб-сайты. Делаем это ради интереса и делимся с вами абсолютно бесплатно.</p>
+                    <div class="hero-actions">
+                        <a href="pages/programs.html" class="btn-primary lg hero-cta-primary">Наши разработки</a>
+                        <a href="#about" class="btn-secondary lg hero-cta-secondary">О нас</a>
+                    </div>
+                    <div class="hero-preview">
+                        <img src="./static/images/Kiro_Bot/main.jpg" alt="Скриншот Kiro Bot">
+                        <div class="hero-preview-content">
+                            <span class="hero-preview-eyebrow">Последний релиз</span>
+                            <h2>Kiro Bot для ВКонтакте</h2>
+                            <p>Автономный Android-бот с правилами, журналом событий и управлением ответами прямо со смартфона.</p>
+                            <a href="pages/program_detail.html?id=2" class="hero-preview-link">Посмотреть подробнее</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,32 +81,32 @@
         
 
         <!-- Stats Section -->
-        <section class="section-padding" style="position: relative; overflow: hidden; background: linear-gradient(180deg, var(--bg-color) 0%, rgba(255, 255, 255, 0.02) 100%);">
+        <section class="section-padding soft-section">
             <div class="container">
-                <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; text-align: center;">
+                <div class="stats-grid">
                     
-                    <div class="stat-card" style="padding: 40px 24px; text-align: center;">
-                        <div style="width: 64px; height: 64px; margin: 0 auto 24px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                         </div>
-                        <h3 class="stat-number" data-target="1" style="font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; margin-bottom: 12px; line-height: 1; letter-spacing: -1px;">0</h3>
-                        <p style="color: var(--text-secondary); font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin: 0;">Разработок</p>
+                        <h3 class="stat-number" data-target="1">0</h3>
+                        <p class="stat-label">Разработок</p>
                     </div>
 
-                    <div class="stat-card" style="padding: 40px 24px; text-align: center;">
-                        <div style="width: 64px; height: 64px; margin: 0 auto 24px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                         </div>
-                        <h3 class="stat-number" id="total-downloads-stat" data-target="533" style="font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; margin-bottom: 12px; line-height: 1; letter-spacing: -1px;">0</h3>
-                        <p style="color: var(--text-secondary); font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin: 0;">Скачиваний</p>
+                        <h3 class="stat-number" id="total-downloads-stat" data-target="533">0</h3>
+                        <p class="stat-label">Скачиваний</p>
                     </div>
 
-                    <div class="stat-card" style="padding: 40px 24px; text-align: center;">
-                        <div style="width: 64px; height: 64px; margin: 0 auto 24px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);">
+                    <div class="stat-card">
+                        <div class="stat-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                         </div>
-                        <h3 class="stat-number" id="total-loc-stat" data-target="462" style="font-size: clamp(3rem, 10vw, 4.5rem); font-weight: 900; margin-bottom: 12px; line-height: 1; letter-spacing: -1px;">0</h3>
-                        <p style="color: var(--text-secondary); font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin: 0;">Строк кода</p>
+                        <h3 class="stat-number" id="total-loc-stat" data-target="462">0</h3>
+                        <p class="stat-label compact">Строк кода</p>
                     </div>
 
                 </div>
@@ -106,12 +115,12 @@
 
 
         <!-- Featured Program Section -->
-        <section class="section-padding" style="">
+        <section class="section-padding">
             <div class="container">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+                <div class="section-heading-row">
                     <div>
-                        <h2 class="section-title" style="margin-bottom: 8px;">Недавние релизы</h2>
-                        <p style="color: var(--text-secondary); font-size: clamp(0.9rem, 3vw, 1.1rem);">Свежие разработки студии</p>
+                        <h2 class="section-title section-title-tight">Недавние релизы</h2>
+                        <p class="section-kicker">Свежие разработки студии</p>
                     </div>
                     <a href="pages/programs.html" class="btn-secondary">Все разработки &rarr;</a>
                 </div>
@@ -122,81 +131,81 @@
             </div>
         </section>
 
-        <section id="directions" class="section-padding" style="">
+        <section id="directions" class="section-padding">
             <div class="container">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Что мы пишем</h2>
+                <h2 class="section-title section-heading-center">Что мы пишем</h2>
                 <div class="directions-grid">
-                    <div class="direction-card" style="align-items: center; text-align: center; justify-content: center;">
+                    <div class="direction-card centered">
                         <div class="direction-icon">
                             <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                         </div>
-                        <h3 style="margin: 0;">Android-приложения</h3>
+                        <h3 class="flush-title">Android-приложения</h3>
                     </div>
-                    <div class="direction-card" style="align-items: center; text-align: center; justify-content: center;">
+                    <div class="direction-card centered">
                         <div class="direction-icon">
                             <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a8.3 8.3 0 0 0-5.3-1.8 8.3 8.3 0 0 0-5.3 1.8 8.3 8.3 0 0 0-5.3-1.8A8.3 8.3 0 0 0 0 15v4a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-4z"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         </div>
-                        <h3 style="margin: 0;">Чат-боты</h3>
+                        <h3 class="flush-title">Чат-боты</h3>
                     </div>
-                    <div class="direction-card" style="align-items: center; text-align: center; justify-content: center;">
+                    <div class="direction-card centered">
                         <div class="direction-icon">
                             <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
                         </div>
-                        <h3 style="margin: 0;">Сайты</h3>
+                        <h3 class="flush-title">Сайты</h3>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="about" class="section-padding" style="position: relative; overflow: hidden;">
-            <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(255,255,255,0.02), transparent 60%); z-index: 0; pointer-events: none;"></div>
-            <div class="container" style="position: relative; z-index: 1;">
-                <div style="max-width: 800px; margin: 0 auto; padding: clamp(24px, 5vw, 48px); background: var(--glass-bg); border: 1px solid var(--border-color); border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center;">
-                    <div style="width: 64px; height: 64px; margin: 0 auto 24px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-primary); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);">
+        <section id="about" class="section-padding layered-section">
+            <div class="radial-layer"></div>
+            <div class="container content-layer">
+                <div class="about-card">
+                    <div class="round-icon">
                         <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                     </div>
-                    <h2 class="section-title" style="margin-bottom: 24px;">Философия хобби</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 24px;">
-                        <strong style="color: var(--text-primary);">KirDev Studio</strong> — это не бизнес. У нас нет инвесторов, планов продаж и рекламы. Мы пишем код исключительно ради удовольствия, саморазвития и интереса.
+                    <h2 class="section-title detail-section-title">Философия хобби</h2>
+                    <p class="body-copy">
+                        <strong class="text-primary-inline">KirDev Studio</strong> — это не бизнес. У нас нет инвесторов, планов продаж и рекламы. Мы пишем код исключительно ради удовольствия, саморазвития и интереса.
                     </p>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8;">
-                        Так как это наше хобби, весь софт распространяется абсолютно <strong style="color: var(--text-primary);">бесплатно</strong> и не содержит рекламы, скрытых подписок или систем сбора личных данных. Мы ценим вашу приватность и делаем программы, которыми пользуемся сами.
+                    <p class="body-copy no-margin">
+                        Так как это наше хобби, весь софт распространяется абсолютно <strong class="text-primary-inline">бесплатно</strong> и не содержит рекламы, скрытых подписок или систем сбора личных данных. Мы ценим вашу приватность и делаем программы, которыми пользуемся сами.
                     </p>
                 </div>
             </div>
         </section>
         
-        <section id="faq" class="section-padding" style="position: relative;">
-            <div class="container" style="position: relative; z-index: 1;">
-                <div style="text-align: center; margin-bottom: 50px;">
+        <section id="faq" class="section-padding content-layer">
+            <div class="container content-layer">
+                <div class="section-heading-center">
                     <h2 class="section-title">Часто задаваемые вопросы</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem;">Всё, что вы хотели знать о нашей студии</p>
+                    <p class="body-copy no-margin">Всё, что вы хотели знать о нашей студии</p>
                 </div>
-                <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px;">
+                <div class="faq-list">
                     
-                    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 16px; background: var(--glass-bg); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <button class="faq-trigger" style="width: 100%; padding: clamp(16px, 4vw, 24px) clamp(16px, 5vw, 32px); background: transparent; border: none; text-align: left; color: var(--text-primary); font-size: clamp(1rem, 3vw, 1.1rem); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none; gap: 16px;">
+                    <div class="faq-item">
+                        <button class="faq-trigger">
                             <span>Безопасны ли ваши программы?</span>
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
-                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style=" color: var(--text-primary);"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            <div class="faq-trigger-icon">
+                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </div>
                         </button>
-                        <div class="faq-content" style="max-height: 0; overflow: hidden;  padding: 0 32px;">
-                            <p style="color: var(--text-secondary); line-height: 1.8; padding-bottom: 32px; font-size: 1rem;">
+                        <div class="faq-content">
+                            <p class="faq-copy">
                                 Да, абсолютно. Весь софт собирается локально и не содержит вредоносных модулей, майнеров или шпионского кода. Мы пишем его для души, поэтому безопасность и открытость — наш главный приоритет.
                             </p>
                         </div>
                     </div>
         
-                    <div class="faq-item" style="border: 1px solid var(--border-color); border-radius: 16px; background: var(--glass-bg); overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <button class="faq-trigger" style="width: 100%; padding: clamp(16px, 4vw, 24px) clamp(16px, 5vw, 32px); background: transparent; border: none; text-align: left; color: var(--text-primary); font-size: clamp(1rem, 3vw, 1.1rem); font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; outline: none; gap: 16px;">
+                    <div class="faq-item">
+                        <button class="faq-trigger">
                             <span>Почему это бесплатно?</span>
-                            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
-                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style=" color: var(--text-primary);"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            <div class="faq-trigger-icon">
+                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </div>
                         </button>
-                        <div class="faq-content" style="max-height: 0; overflow: hidden;  padding: 0 32px;">
-                            <p style="color: var(--text-secondary); line-height: 1.8; padding-bottom: 32px; font-size: 1rem;">
+                        <div class="faq-content">
+                            <p class="faq-copy">
                                 Для нас программирование — это хобби и способ решать собственные задачи. Делиться готовыми утилитами с миром бесплатно — наш способ сделать интернет немного лучше и удобнее для каждого.
                             </p>
                         </div>
@@ -235,13 +244,13 @@
 
 
     <!-- Подключаем базу программ для подсчета скачиваний -->
-    <script src="./static/js/programs.js?v=2.1"></script>
+    <script src="./static/js/programs.js?v=2.2"></script>
 
 
 
 
 
-    <script src="./static/js/main.js"></script>
+    <script src="./static/js/main.js?v=1.1"></script>
 </body>
 
 </html>
