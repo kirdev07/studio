@@ -31,12 +31,12 @@
     <link rel="manifest" href="../static/js/manifest.json">
 </head>
 <body>
-    <div class="glow-orb"></div>
-    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
     
     <header class="header">
         <div class="container header-inner">
-            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 4px;">
+            <div class="logo-wrapper">
                 <a href="../index.html" class="logo">KirDev <span>Studio</span></a>
 
             </div>
@@ -57,36 +57,36 @@
     </header>
 
     <main>
-        <section class="portfolio" style="padding-top: clamp(100px, 15vw, 150px); min-height: 80vh;">
+        <section class="portfolio portfolio-page">
             <div class="container">
-                <h2 class="section-title" style="text-align: center; margin-bottom: 24px;">Наши Разработки</h2>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <h2 class="section-title page-title-centered">Наши Разработки</h2>
+                <p class="page-intro">
                     Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.
                 </p>
 
                 <!-- Вкладки фильтрации (Категории), Поиск и Сортировка -->
-                <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 50px;">
+                <div class="catalog-controls">
                     <!-- Search and Sort Bar -->
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; background: var(--glass-bg); border: 1px solid var(--border-color); padding: 16px; border-radius: 16px; backdrop-filter: blur(10px);">
-                        <div style="position: relative; flex-grow: 1; max-width: 400px;">
-                            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                            <input type="text" id="search-input" placeholder="Поиск программ..." style="width: 100%; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 12px 16px 12px 48px; border-radius: 12px; font-size: 1rem; outline: none; transition: all 0.3s ease;">
+                    <div class="catalog-search-sort">
+                        <div class="catalog-search-field">
+                            <svg class="search-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="search-input" class="catalog-input" placeholder="Поиск программ...">
                         </div>
 
-                        <div style="display: flex; gap: 12px; align-items: center;">
-                            <label for="sort-select" style="color: var(--text-secondary); font-size: 0.9rem;">Сортировка:</label>
-                            <div style="position: relative;">
-                                <select id="sort-select" style="background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 16px; border-radius: 10px; font-size: 0.9rem; outline: none; cursor: pointer; appearance: none; padding-right: 36px; min-width: 160px;">
+                        <div class="catalog-sort-group">
+                            <label for="sort-select" class="catalog-label">Сортировка:</label>
+                            <div class="catalog-select-wrapper">
+                                <select id="sort-select" class="catalog-select">
                                     <option value="new">Сначала новые</option>
                                     <option value="popular">Популярные</option>
                                     <option value="az">От А до Я</option>
                                 </select>
-                                <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                <svg class="select-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </div>
                         </div>
                     </div>
 
-                    <div class="filter-container" style="margin-bottom: 0;">
+                    <div class="filter-container">
                         <button class="filter-btn active" data-filter="all">Все</button>
                         <button class="filter-btn" data-filter="Android">Android</button>
                         <button class="filter-btn" data-filter="Боты">Боты</button>
@@ -95,11 +95,11 @@
                 </div>
 
                 <!-- Пустое состояние при фильтрации (показывается через JS) -->
-                <div id="empty-filter-msg" style="display: none; text-align: center; padding: 80px 20px; color: var(--text-secondary); background: var(--glass-bg); border: 1px dashed var(--border-color); border-radius: 20px; margin-bottom: 40px;">
-                    <svg aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 24px; opacity: 0.5;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="9" y1="9" x2="13" y2="13"></line><line x1="13" y1="9" x2="9" y2="13"></line></svg>
-                    <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 12px;">Разработки не найдены</h3>
-                    <p style="font-size: 1.1rem;">По вашему запросу ничего не нашлось. Попробуйте изменить параметры поиска или фильтры.</p>
-                    <button class="btn-secondary" style="margin-top: 24px;" onclick="resetSearchAndFilters()">Сбросить всё</button>
+                <div id="empty-filter-msg" class="empty-filter">
+                    <svg class="empty-icon" aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="9" y1="9" x2="13" y2="13"></line><line x1="13" y1="9" x2="9" y2="13"></line></svg>
+                    <h3 class="empty-title">Разработки не найдены</h3>
+                    <p class="empty-copy">По вашему запросу ничего не нашлось. Попробуйте изменить параметры поиска или фильтры.</p>
+                    <button class="btn-secondary reset-btn" onclick="resetSearchAndFilters()">Сбросить всё</button>
                 </div>
 
                 <div class="programs-grid" id="programs-grid">
@@ -124,7 +124,7 @@
     </footer>
 
     <!-- Подключаем базу программ -->
-    <script src="../static/js/programs.js?v=2.1"></script>
+    <script src="../static/js/programs.js?v=2.2"></script>
 
     <script>
 
@@ -134,9 +134,9 @@
             
             if (typeof PROGRAMS === 'undefined' || PROGRAMS.length === 0) {
                 grid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 80px 20px; color: var(--text-secondary);">
-                        <svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px; opacity: 0.4;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                        <p style="font-size: 1.1rem;">Разработки ещё не добавлены</p>
+                    <div class="program-card-empty">
+                        <svg class="empty-icon" aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        <p class="empty-copy">Разработки ещё не добавлены</p>
                     </div>
                 `;
                 return;
@@ -174,43 +174,34 @@
 
             programsToRender.forEach((p, index) => {
                 const card = document.createElement('div');
-                card.className = 'program-card';
+                card.className = 'program-card catalog-card';
                 card.setAttribute('data-category', p.category);
                 card.setAttribute('data-name', p.name.toLowerCase());
-                card.style.display = 'flex';
-                card.style.flexDirection = 'column';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                card.style.padding = 'clamp(24px, 5vw, 40px)';
-                card.style.background = 'transparent';
-                card.style.border = '1px solid rgba(255,255,255,0.1)';
-                card.style.borderRadius = '0';
 
                 card.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-                        <h3 style="font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 800; margin: 0; letter-spacing: -1px; word-break: break-word;">${p.name}</h3>
-                        <div class="status-tags" style="display: flex; gap: 8px;"></div>
+                    <div class="program-card-title-row">
+                        <h3 class="program-card-title">${p.name}</h3>
+                        <div class="status-tags"></div>
                     </div>
                     
-                    <div style="display: flex; gap: 12px; margin-bottom: 24px; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; flex-wrap: wrap; align-items: center;">
-                        <span style="display: flex; align-items: center; gap: 6px;">
+                    <div class="program-card-meta">
+                        <span class="meta-item">
                             ${getPlatformIcon(p.category)}
                             ${p.category}
                         </span>
                         <span>•</span>
                         <span class="version-badge">v${p.version}</span>
                         <span>•</span>
-                        <span style="display: flex; align-items: center; gap: 6px;">
+                        <span class="meta-item">
                             <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             <span class="download-counter" data-program-id="${p.id}">${p.download_count}</span> скачиваний
                         </span>
                     </div>
 
-                    <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 40px; flex-grow: 1;">${p.description}</p>
+                    <p class="program-card-description">${p.description}</p>
                     
                     <div>
-                        <a href="program_detail.html?id=${p.id}" style="display: inline-flex; align-items: center; padding: 12px 32px; background: #ffffff; color: #000000; text-decoration: none; font-weight: 700; font-size: 1rem; transition: opacity 0.2s;">
+                        <a href="program_detail.html?id=${p.id}" class="program-link">
                             Подробнее
                         </a>
                     </div>
@@ -220,8 +211,7 @@
 
                 // Trigger animation
                 setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
+                    card.classList.add('is-visible');
                 }, 50 * index);
             });
 
@@ -270,11 +260,11 @@
             const grid = document.getElementById('programs-grid');
 
             if (filteredPrograms.length === 0) {
-                grid.style.display = 'none';
-                if (emptyMsg) emptyMsg.style.display = 'block';
+                grid.classList.add('is-hidden');
+                if (emptyMsg) emptyMsg.classList.add('is-visible');
             } else {
-                if (emptyMsg) emptyMsg.style.display = 'none';
-                grid.style.display = 'grid'; // Reset grid display
+                if (emptyMsg) emptyMsg.classList.remove('is-visible');
+                grid.classList.remove('is-hidden');
                 renderPrograms(filteredPrograms);
             }
         };
@@ -345,7 +335,7 @@
 
 
 
-    <script src="../static/js/main.js"></script>
+    <script src="../static/js/main.js?v=1.1"></script>
 </body>
 
 </html>

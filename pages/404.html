@@ -32,12 +32,12 @@
     <link rel="manifest" href="./static/js/manifest.json">
 </head>
 <body>
-    <div class="glow-orb"></div>
-    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
     
     <header class="header">
         <div class="container header-inner">
-            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 4px;">
+            <div class="logo-wrapper">
                 <a href="index.html" class="logo">KirDev <span>Studio</span></a>
 
             </div>
@@ -57,11 +57,11 @@
     </header>
 
     <main>
-        <section class="hero" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 120px 0;">
-            <div class="container hero-content" style="text-align: center;">
-                <h1 style="font-size: clamp(4rem, 15vw, 8rem); font-weight: 800; line-height: 1; margin-bottom: 20px;" class="text-gradient">404</h1>
-                <h2 style="font-size: 1.75rem; font-weight: 600; margin-bottom: 24px;">Страница не найдена</h2>
-                <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 40px; font-size: 1.1rem; line-height: 1.6;">
+        <section class="hero not-found-hero">
+            <div class="container hero-content not-found-content">
+                <h1 class="text-gradient not-found-code">404</h1>
+                <h2 class="not-found-title">Страница не найдена</h2>
+                <p class="not-found-copy">
                     Извините, запрашиваемая вами страница не существует, была удалена или временно недоступна.
                 </p>
                 <div class="hero-actions">
@@ -90,7 +90,7 @@
         <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
 
-    <script src="./static/js/main.js"></script>
+    <script src="./static/js/main.js?v=1.1"></script>
 
 </body>
 
