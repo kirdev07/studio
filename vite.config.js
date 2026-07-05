@@ -12,7 +12,7 @@ const generatedProgramPageInputs = existsSync(generatedProgramPagesDir)
   : {};
 
 export default defineConfig({
-  base: '/kirdev-studio.github.io/',
+  base: './',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
