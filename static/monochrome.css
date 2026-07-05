@@ -1,0 +1,159 @@
+/* KirDev Studio strict monochrome theme override
+   Only black, white, and neutral gray accents. */
+
+:root {
+  --accent: #ffffff !important;
+  --accent-hover: #ffffff !important;
+  --accent-soft: rgba(255, 255, 255, 0.06) !important;
+  --accent-border: rgba(255, 255, 255, 0.24) !important;
+  --bg-color: #000000 !important;
+  --bg-primary: #111111 !important;
+  --glass-bg: #0b0b0b !important;
+  --btn-primary-bg: #151515 !important;
+  --text-primary: #f2f2f2 !important;
+  --text-secondary: #9a9a9a !important;
+  --border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+a,
+.nav a:hover,
+.nav a.active,
+.hero-preview-eyebrow,
+.minimal-badge,
+.hero-preview-link,
+.program-link,
+.detail-back-link,
+.telegram-feedback-link,
+.download-btn,
+.detail-download-btn,
+.share-btn,
+.repo-btn,
+.filter-btn.active,
+.catalog-label,
+.badge,
+.badge-new,
+.badge-popular,
+.empty-title,
+.section-title,
+.detail-section-title,
+.screenshots-title,
+.changelog-title {
+  color: #f2f2f2 !important;
+}
+
+a:hover,
+.program-link:hover,
+.hero-preview-link:hover,
+.detail-back-link:hover,
+.download-btn:hover,
+.detail-download-btn:hover {
+  color: #ffffff !important;
+}
+
+.glow-orb,
+.glow-orb.orb-2 {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.045) 0%, rgba(0, 0, 0, 0) 68%) !important;
+}
+
+.hero-preview,
+.minimal-release-card,
+.program-card,
+.detail-hero-block,
+.detail-section,
+.feedback-banner,
+.screenshots-carousel,
+.catalog-input,
+.catalog-select,
+.filter-btn,
+.repo-btn,
+.share-btn,
+.btn-primary,
+.btn-secondary,
+.download-btn,
+.detail-action-btn,
+.badge,
+.badge-new,
+.badge-popular,
+.changelog-section,
+.generated-screenshots-grid,
+.carousel-slide,
+.lightbox-frame {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.download-btn:hover,
+.detail-action-btn:hover,
+.filter-btn:hover,
+.filter-btn.active,
+.program-card:hover,
+.minimal-release-card:hover,
+.repo-btn:hover,
+.share-btn:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(255, 255, 255, 0.34) !important;
+  box-shadow: none !important;
+}
+
+.icon-label svg,
+.search-icon,
+.select-icon,
+.empty-icon,
+.download-btn svg,
+.detail-action-btn svg,
+.repo-btn svg,
+.share-btn svg,
+.stat-card svg,
+.minimal-action svg,
+.carousel-btn svg,
+.lightbox-btn svg,
+#scroll-to-top svg {
+  color: #f2f2f2 !important;
+  stroke: #f2f2f2 !important;
+}
+
+.hero-preview,
+.minimal-release-card {
+  background-color: #050505 !important;
+}
+
+.hero-preview::before,
+.hero-preview::after,
+.program-card::before,
+.minimal-release-card::before,
+.detail-hero-block::before,
+.detail-section::before,
+.feedback-banner::before {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.version-badge,
+.meta-item,
+.detail-meta,
+.page-intro,
+.detail-description,
+.feedback-copy,
+.empty-copy,
+.minimal-desc,
+.program-card-description,
+.hero-preview p,
+.footer p,
+.footer-links p {
+  color: #a3a3a3 !important;
+}
+
+input,
+select,
+textarea {
+  color: #f2f2f2 !important;
+  background: #050505 !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+}
