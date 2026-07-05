@@ -1,4 +1,6 @@
 // База данных программ KirDev Studio для клиентской части
+// Основной источник данных: static/data/programs.json
+// Встроенный массив ниже используется как fallback, чтобы сайт не падал, если JSON недоступен.
 const PROGRAMS = [
   {
     "id": 2,
@@ -33,9 +35,35 @@ const PROGRAMS = [
   }
 ];
 
+const PROGRAMS_DATA_PATH = '../data/programs.json';
 const RELEASE_CACHE_TTL = 5 * 60 * 1000;
 const releaseRequestCache = new Map();
 let updateCountersPromise = null;
+
+async function loadProgramsFromJson() {
+  try {
+    const scriptUrl = document.currentScript?.src || window.location.href;
+    const dataUrl = new URL(PROGRAMS_DATA_PATH, scriptUrl).href;
+    const response = await fetch(dataUrl);
+    if (!response.ok) return PROGRAMS;
+
+    const externalPrograms = await response.json();
+    if (!Array.isArray(externalPrograms) || externalPrograms.length === 0) return PROGRAMS;
+
+    PROGRAMS.splice(0, PROGRAMS.length, ...externalPrograms);
+    document.dispatchEvent(new CustomEvent('kirdev:programs-loaded', { detail: PROGRAMS }));
+  } catch (error) {
+    console.warn('Не удалось загрузить static/data/programs.json, используется fallback:', error);
+  }
+
+  return PROGRAMS;
+}
+
+const programsDataReady = loadProgramsFromJson();
+window.KirDevPrograms = {
+  programs: PROGRAMS,
+  ready: programsDataReady
+};
 
 function parseGithubReleaseUrl(url) {
   if (!url || !url.includes('github.com') || !url.includes('/releases/')) return null;
@@ -361,3 +389,4 @@ function renderLatestRelease() {
 }
 
 renderLatestRelease();
+programsDataReady.then(renderLatestRelease);
