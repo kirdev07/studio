@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Разработки — KirDev Studio</title>
-    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="KirDev Studio - Надежный софт для ваших задач">
     <meta name="twitter:description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio.">
     <meta name="twitter:image" content="https://kirdev07.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://kirdev07.github.io/kirdev-studio.github.io/pages/programs.html">
 
     <meta name="description" content="Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.">
@@ -27,18 +25,16 @@
     <meta property="og:site_name" content="KirDev Studio">
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-
     <link rel="manifest" href="../static/js/manifest.json">
 </head>
 <body>
     <div class="glow-orb" aria-hidden="true"></div>
     <div class="glow-orb orb-2" aria-hidden="true"></div>
-    
+
     <header class="header">
         <div class="container header-inner">
             <div class="logo-wrapper">
                 <a href="../index.html" class="logo">KirDev <span>Studio</span></a>
-
             </div>
 
             <button class="menu-toggle" aria-label="Открыть меню" id="mobile-menu">
@@ -51,7 +47,6 @@
                 <a href="programs.html">Разработки</a>
                 <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer">Telegram</a>
                 <a href="https://vk.com/kirdev_07" target="_blank" rel="noopener noreferrer">VK</a>
-
             </nav>
         </div>
     </header>
@@ -60,13 +55,9 @@
         <section class="portfolio portfolio-page">
             <div class="container">
                 <h2 class="section-title page-title-centered">Наши Разработки</h2>
-                <p class="page-intro">
-                    Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.
-                </p>
+                <p class="page-intro">Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.</p>
 
-                <!-- Вкладки фильтрации (Категории), Поиск и Сортировка -->
                 <div class="catalog-controls">
-                    <!-- Search and Sort Bar -->
                     <div class="catalog-search-sort">
                         <div class="catalog-search-field">
                             <svg class="search-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -94,17 +85,14 @@
                     </div>
                 </div>
 
-                <!-- Пустое состояние при фильтрации (показывается через JS) -->
                 <div id="empty-filter-msg" class="empty-filter">
                     <svg class="empty-icon" aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="9" y1="9" x2="13" y2="13"></line><line x1="13" y1="9" x2="9" y2="13"></line></svg>
                     <h3 class="empty-title">Разработки не найдены</h3>
                     <p class="empty-copy">По вашему запросу ничего не нашлось. Попробуйте изменить параметры поиска или фильтры.</p>
-                    <button class="btn-secondary reset-btn" onclick="resetSearchAndFilters()">Сбросить всё</button>
+                    <button class="btn-secondary reset-btn" id="reset-filters-btn">Сбросить всё</button>
                 </div>
 
-                <div class="programs-grid" id="programs-grid">
-                    <!-- Будет заполнено через JS -->
-                </div>
+                <div class="programs-grid" id="programs-grid"></div>
             </div>
         </section>
     </main>
@@ -123,219 +111,12 @@
         </div>
     </footer>
 
-    <!-- Подключаем базу программ -->
-    <script src="../static/js/programs.js?v=2.2"></script>
-
-    <script>
-
-        // Динамическая генерация карточек программ
-        document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('programs-grid');
-            
-            if (typeof PROGRAMS === 'undefined' || PROGRAMS.length === 0) {
-                grid.innerHTML = `
-                    <div class="program-card-empty">
-                        <svg class="empty-icon" aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                        <p class="empty-copy">Разработки ещё не добавлены</p>
-                    </div>
-                `;
-                return;
-            }
-
-
-        const getPlatformIcon = (category) => {
-            switch(category) {
-                case 'ПК':
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>';
-                case 'Android':
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>';
-                case 'Боты':
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a8.3 8.3 0 0 0-5.3-1.8 8.3 8.3 0 0 0-5.3 1.8 8.3 8.3 0 0 0-5.3-1.8A8.3 8.3 0 0 0 0 15v4a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-4z"></path><circle cx="12" cy="7" r="4"></circle></svg>';
-                case 'Сайты':
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>';
-                case 'Python':
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>';
-                case 'Расширения для браузеров':
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>';
-                default:
-                    return '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>';
-            }
-        };
-
-        // Render Programs Function
-        const renderPrograms = (programsToRender) => {
-            const grid = document.getElementById('programs-grid');
-            grid.innerHTML = '';
-
-            if (!programsToRender || programsToRender.length === 0) {
-                // Should not reach here if handled by empty state logic
-                return;
-            }
-
-            programsToRender.forEach((p, index) => {
-                const card = document.createElement('div');
-                card.className = 'program-card catalog-card';
-                card.setAttribute('data-category', p.category);
-                card.setAttribute('data-name', p.name.toLowerCase());
-
-                card.innerHTML = `
-                    <div class="program-card-title-row">
-                        <h3 class="program-card-title">${p.name}</h3>
-                        <div class="status-tags"></div>
-                    </div>
-                    
-                    <div class="program-card-meta">
-                        <span class="meta-item">
-                            ${getPlatformIcon(p.category)}
-                            ${p.category}
-                        </span>
-                        <span>•</span>
-                        <span class="version-badge">v${p.version}</span>
-                        <span>•</span>
-                        <span class="meta-item">
-                            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            <span class="download-counter" data-program-id="${p.id}">${p.download_count}</span> скачиваний
-                        </span>
-                    </div>
-
-                    <p class="program-card-description">${p.description}</p>
-                    
-                    <div>
-                        <a href="program_detail.html?id=${p.id}" class="program-link">
-                            Подробнее
-                        </a>
-                    </div>
-                `;
-
-                grid.appendChild(card);
-
-                // Trigger animation
-                setTimeout(() => {
-                    card.classList.add('is-visible');
-                }, 50 * index);
-            });
-
-            // Re-bind the update counters since we re-rendered
-            updateDownloadCounters();
-        };
-
-        let currentFilter = 'all';
-        let currentSort = 'new';
-        let currentSearch = '';
-
-        const applyFiltersAndSort = () => {
-            let filteredPrograms = [...PROGRAMS];
-
-            // 1. Search Filter
-            if (currentSearch.trim() !== '') {
-                const query = currentSearch.toLowerCase();
-                filteredPrograms = filteredPrograms.filter(p =>
-                    p.name.toLowerCase().includes(query) ||
-                    p.description.toLowerCase().includes(query)
-                );
-            }
-
-            // 2. Category Filter
-            if (currentFilter !== 'all') {
-                filteredPrograms = filteredPrograms.filter(p => p.category === currentFilter);
-            }
-
-            // 3. Sort
-            if (currentSort === 'new') {
-                filteredPrograms.sort((a, b) => b.id - a.id);
-            } else if (currentSort === 'popular') {
-                filteredPrograms.sort((a, b) => {
-                    const countA = a.dynamic_count || a.download_count;
-                    const countB = b.dynamic_count || b.download_count;
-                    return countB - countA;
-                });
-            } else if (currentSort === 'az') {
-                filteredPrograms.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (currentSort === 'za') {
-                filteredPrograms.sort((a, b) => b.name.localeCompare(a.name));
-            }
-
-            // 4. Render or show empty state
-            const emptyMsg = document.getElementById('empty-filter-msg');
-            const grid = document.getElementById('programs-grid');
-
-            if (filteredPrograms.length === 0) {
-                grid.classList.add('is-hidden');
-                if (emptyMsg) emptyMsg.classList.add('is-visible');
-            } else {
-                if (emptyMsg) emptyMsg.classList.remove('is-visible');
-                grid.classList.remove('is-hidden');
-                renderPrograms(filteredPrograms);
-            }
-        };
-
-        window.resetSearchAndFilters = () => {
-            document.getElementById('search-input').value = '';
-            currentSearch = '';
-
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('[data-filter="all"]').classList.add('active');
-            currentFilter = 'all';
-
-            document.getElementById('sort-select').value = 'new';
-            currentSort = 'new';
-
-            applyFiltersAndSort();
-        };
-
-            renderPrograms([...PROGRAMS].sort((a, b) => b.id - a.id));
-
-            // Search input
-            const searchInput = document.getElementById('search-input');
-            if(searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    currentSearch = e.target.value;
-                    applyFiltersAndSort();
-                });
-            }
-
-            // Sort select
-            const sortSelect = document.getElementById('sort-select');
-            if(sortSelect) {
-                sortSelect.addEventListener('change', (e) => {
-                    currentSort = e.target.value;
-                    applyFiltersAndSort();
-                });
-            }
-
-            // Обновляем счетчики скачиваний
-            updateDownloadCounters();
-
-            // Инициализируем фильтрацию
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const programCards = document.querySelectorAll('.program-card');
-            const emptyMsg = document.getElementById('empty-filter-msg');
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    currentFilter = button.getAttribute('data-filter');
-                    applyFiltersAndSort();
-                });
-            });
-        });
-    </script>
-
-
-
-    <!-- Scroll to Top Button -->
     <button id="scroll-to-top" aria-label="Наверх">
         <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
 
-
-
-
-
-
-
+    <script src="../static/js/programs.js?v=2.3"></script>
+    <script src="../static/js/catalog.js?v=1.0"></script>
     <script src="../static/js/main.js?v=1.1"></script>
 </body>
-
 </html>
