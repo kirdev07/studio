@@ -3,8 +3,11 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
+const siteUrl = 'https://kirdev07.github.io/kirdev-studio.github.io';
 const htmlFiles = ['index.html', 'pages/programs.html', 'pages/program_detail.html', 'pages/404.html'];
 const requiredFiles = [
+  'robots.txt',
+  'sitemap.xml',
   'static/style.css',
   'static/css/main.css',
   'static/css/tokens.css',
@@ -129,6 +132,23 @@ async function validateCssEntrypoint() {
   }
 }
 
+async function validateSeoFiles() {
+  const robots = await readFile(path.join(root, 'robots.txt'), 'utf8');
+  if (!robots.includes('User-agent: *')) {
+    fail('robots.txt should include User-agent: *');
+  }
+  if (!robots.includes(`${siteUrl}/sitemap.xml`)) {
+    fail('robots.txt should reference the sitemap URL');
+  }
+
+  const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+  for (const requiredUrl of [`${siteUrl}/`, `${siteUrl}/pages/programs.html`, `${siteUrl}/pages/program_detail.html?id=2`]) {
+    if (!sitemap.includes(`<loc>${requiredUrl}</loc>`)) {
+      fail(`sitemap.xml is missing URL: ${requiredUrl}`);
+    }
+  }
+}
+
 for (const file of requiredFiles) {
   assertFileExists(file);
 }
@@ -141,6 +161,7 @@ for (const htmlFile of htmlFiles) {
 
 await validateProgramsData();
 await validateCssEntrypoint();
+await validateSeoFiles();
 
 if (errors.length > 0) {
   console.error('\nStatic site validation failed:\n');
