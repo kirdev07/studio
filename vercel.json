@@ -1,6 +1,6 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "cleanUrls": true,
+  "buildCommand": "echo 'KirDev Studio static site: no Vite build for Vercel'",
+  "outputDirectory": ".",
+  "cleanUrls": false,
   "trailingSlash": false
 }
