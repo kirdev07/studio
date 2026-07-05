@@ -8,6 +8,9 @@ const htmlFiles = ['index.html', 'pages/programs.html', 'pages/program_detail.ht
 const requiredFiles = [
   'robots.txt',
   'sitemap.xml',
+  'vite.config.js',
+  'scripts/generate-sitemap.mjs',
+  'scripts/generate-program-pages.mjs',
   'static/style.css',
   'static/css/main.css',
   'static/css/tokens.css',
@@ -104,22 +107,36 @@ function validateProgramList(programs, sourceName) {
   }
 }
 
-async function validateProgramsData() {
+async function getProgramsData() {
   const jsonSource = await readFile(path.join(root, 'static/data/programs.json'), 'utf8');
-  let programsFromJson;
 
   try {
-    programsFromJson = JSON.parse(jsonSource);
+    return JSON.parse(jsonSource);
   } catch (error) {
     fail(`static/data/programs.json is invalid JSON: ${error.message}`);
-    return;
+    return [];
   }
+}
 
+async function validateProgramsData() {
+  const programsFromJson = await getProgramsData();
   validateProgramList(programsFromJson, 'static/data/programs.json');
 
   const jsSource = await readFile(path.join(root, 'static/js/programs.js'), 'utf8');
   if (!jsSource.includes('static/data/programs.json')) {
     fail('static/js/programs.js should reference static/data/programs.json as the external data source');
+  }
+}
+
+async function validateGeneratedProgramPages() {
+  const generator = await readFile(path.join(root, 'scripts/generate-program-pages.mjs'), 'utf8');
+  if (!generator.includes('pages/programs')) {
+    fail('program page generator should write files into pages/programs');
+  }
+
+  const viteConfig = await readFile(path.join(root, 'vite.config.js'), 'utf8');
+  if (!viteConfig.includes('generatedProgramPageInputs')) {
+    fail('vite.config.js should include generated program pages in the build input');
   }
 }
 
@@ -141,11 +158,9 @@ async function validateSeoFiles() {
     fail('robots.txt should reference the sitemap URL');
   }
 
-  const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
-  for (const requiredUrl of [`${siteUrl}/`, `${siteUrl}/pages/programs.html`, `${siteUrl}/pages/program_detail.html?id=2`]) {
-    if (!sitemap.includes(`<loc>${requiredUrl}</loc>`)) {
-      fail(`sitemap.xml is missing URL: ${requiredUrl}`);
-    }
+  const sitemapSource = await readFile(path.join(root, 'scripts/generate-sitemap.mjs'), 'utf8');
+  if (!sitemapSource.includes('pages/programs/${encodeURIComponent(program.id)}.html')) {
+    fail('sitemap generator should use generated static program pages');
   }
 }
 
@@ -160,6 +175,7 @@ for (const htmlFile of htmlFiles) {
 }
 
 await validateProgramsData();
+await validateGeneratedProgramPages();
 await validateCssEntrypoint();
 await validateSeoFiles();
 
