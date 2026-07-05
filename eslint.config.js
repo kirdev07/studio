@@ -9,12 +9,7 @@ export default [
       ecmaVersion: 2022,
       sourceType: 'script',
       globals: {
-        ...globals.browser,
-        PROGRAMS: 'readonly',
-        RELEASE_CACHE_TTL: 'readonly',
-        parseGithubReleaseUrl: 'readonly',
-        fetchGithubReleaseInfo: 'readonly',
-        updateDownloadCounters: 'readonly'
+        ...globals.browser
       }
     },
     rules: {
