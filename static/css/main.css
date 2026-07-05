@@ -1,0 +1,12 @@
+/*
+  KirDev Studio CSS entrypoint.
+  The old static/style.css is kept as a legacy compatibility layer while new styles are split by responsibility.
+*/
+
+@import url('../style.css');
+@import url('./tokens.css');
+@import url('./base.css');
+@import url('./layout.css');
+@import url('./components.css');
+@import url('./pages.css');
+@import url('./utilities.css');
