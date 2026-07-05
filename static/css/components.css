@@ -1,0 +1,6 @@
+/* Component-level styles for buttons, cards, badges, navigation, toasts, and carousels.
+   New or refactored components should be moved here from ../style.css gradually. */
+
+.repo-btn:not(.is-visible) {
+  display: none;
+}
