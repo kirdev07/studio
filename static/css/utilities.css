@@ -1,0 +1,5 @@
+/* Small reusable utility classes. */
+
+.is-hidden {
+  display: none !important;
+}
