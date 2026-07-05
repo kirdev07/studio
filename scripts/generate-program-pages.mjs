@@ -19,10 +19,15 @@ function normalizeImagePath(pathValue) {
   return pathValue.replace('./static/', '../../static/');
 }
 
+function getSocialImage(program) {
+  const imagePath = program.cover_image || './static/images/hero_illustration.jpg';
+  return `${siteUrl}/${imagePath.replace('./', '')}`;
+}
+
 function renderProgramPage(program) {
   const title = `${escapeHtml(program.name)} — Скачать бесплатно на KirDev Studio`;
   const description = escapeHtml(program.description);
-  const coverImage = normalizeImagePath(program.cover_image || './static/images/hero_illustration.jpg');
+  const socialImage = getSocialImage(program);
   const canonical = `${siteUrl}/pages/programs/${encodeURIComponent(program.id)}.html`;
   const features = program.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join('\n                    ');
   const screenshots = (program.screenshots || [])
@@ -45,13 +50,13 @@ function renderProgramPage(program) {
     <meta property="og:type" content="website">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
-    <meta property="og:image" content="${siteUrl}/${program.cover_image.replace('./', '')}">
+    <meta property="og:image" content="${socialImage}">
     <meta property="og:url" content="${canonical}">
     <meta property="og:site_name" content="KirDev Studio">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${title}">
     <meta name="twitter:description" content="${description}">
-    <meta name="twitter:image" content="${siteUrl}/${program.cover_image.replace('./', '')}">
+    <meta name="twitter:image" content="${socialImage}">
 </head>
 <body>
     <div class="glow-orb" aria-hidden="true"></div>
