@@ -9,6 +9,7 @@ const requiredFiles = [
   'robots.txt',
   'sitemap.xml',
   'vite.config.js',
+  'scripts/sync-css-links.mjs',
   'scripts/generate-sitemap.mjs',
   'scripts/generate-program-pages.mjs',
   'static/style.css',
@@ -146,6 +147,11 @@ async function validateCssEntrypoint() {
     if (!css.includes(layer)) {
       fail(`static/css/main.css does not import ${layer}`);
     }
+  }
+
+  const syncScript = await readFile(path.join(root, 'scripts/sync-css-links.mjs'), 'utf8');
+  if (!syncScript.includes('static/css/main.css')) {
+    fail('CSS sync script should switch HTML files to static/css/main.css');
   }
 }
 
