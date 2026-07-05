@@ -181,6 +181,13 @@ async function getProgramReleaseInfo(program) {
   return result;
 }
 
+function createBadge(className, text) {
+  const badge = document.createElement('span');
+  badge.className = className;
+  badge.textContent = text;
+  return badge;
+}
+
 function updateStatusTags(card, program, info) {
   const tagsContainer = card.querySelector('.status-tags');
   if (!tagsContainer) return;
@@ -188,7 +195,7 @@ function updateStatusTags(card, program, info) {
   tagsContainer.textContent = '';
 
   if (info.count > 200) {
-    tagsContainer.insertAdjacentHTML('beforeend', '<span class="badge badge-popular">Популярное</span>');
+    tagsContainer.appendChild(createBadge('badge badge-popular', 'Популярное'));
   }
 
   let isNew = false;
@@ -202,7 +209,7 @@ function updateStatusTags(card, program, info) {
   }
 
   if (isNew) {
-    tagsContainer.insertAdjacentHTML('beforeend', '<span class="badge badge-new">Новинка</span>');
+    tagsContainer.appendChild(createBadge('badge badge-new', 'Новинка'));
   }
 }
 
@@ -300,36 +307,57 @@ function updateDownloadCounters() {
   return updateCountersPromise;
 }
 
+function createLatestReleaseCard(program, index) {
+  const card = document.createElement('a');
+  card.href = `pages/program_detail.html?id=${program.id}`;
+  card.className = 'minimal-release-card minimal-release-card-full';
+
+  const image = document.createElement('img');
+  image.src = program.cover_image;
+  image.alt = `Обложка ${program.name}`;
+  image.className = 'minimal-image';
+
+  const content = document.createElement('div');
+  content.className = 'minimal-content';
+
+  const badge = document.createElement('span');
+  badge.className = 'minimal-badge';
+  badge.textContent = index === 0 ? 'Новый релиз' : 'Прошлый релиз';
+
+  const title = document.createElement('h3');
+  title.className = 'minimal-title';
+  title.textContent = program.name;
+
+  const description = document.createElement('p');
+  description.className = 'minimal-desc';
+  description.textContent = program.description;
+
+  const action = document.createElement('div');
+  action.className = 'minimal-action';
+  action.insertAdjacentHTML('beforeend', '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>');
+
+  content.append(badge, title, description);
+  card.append(image, content, action);
+
+  return card;
+}
+
 function renderLatestRelease() {
   const container = document.getElementById('dynamic-latest-release');
   if (!container) return;
 
   const sortedPrograms = [...PROGRAMS].sort((a, b) => b.id - a.id);
   const topPrograms = sortedPrograms.slice(0, 2);
+  if (topPrograms.length === 0) return;
 
-  if (topPrograms.length > 0) {
-    let html = '<div class="latest-release-grid">';
+  const grid = document.createElement('div');
+  grid.className = 'latest-release-grid';
+  topPrograms.forEach((program, index) => {
+    grid.appendChild(createLatestReleaseCard(program, index));
+  });
 
-    topPrograms.forEach((program, index) => {
-      const badgeText = index === 0 ? 'Новый релиз' : 'Прошлый релиз';
-      html += `
-        <a href="pages/program_detail.html?id=${program.id}" class="minimal-release-card minimal-release-card-full">
-          <img src="${program.cover_image}" alt="Обложка ${program.name}" class="minimal-image">
-          <div class="minimal-content">
-            <span class="minimal-badge">${badgeText}</span>
-            <h3 class="minimal-title">${program.name}</h3>
-            <p class="minimal-desc">${program.description}</p>
-          </div>
-          <div class="minimal-action">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </div>
-        </a>
-      `;
-    });
-
-    html += '</div>';
-    container.innerHTML = html;
-  }
+  container.textContent = '';
+  container.appendChild(grid);
 }
 
 renderLatestRelease();
