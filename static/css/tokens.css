@@ -1,0 +1,8 @@
+/* Design tokens and theme variables for new KirDev Studio styles.
+   Existing variables currently live in ../style.css and remain the source of truth during migration. */
+
+:root {
+  --site-max-width: 1400px;
+  --site-inline-padding: 32px;
+  --header-height: 80px;
+}
