@@ -1,0 +1,6 @@
+/* Page-specific styles for home, catalog, detail, and 404 pages.
+   Existing page styles are still in ../style.css during migration. */
+
+.detail-loading {
+  text-align: center;
+}
