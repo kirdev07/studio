@@ -22,6 +22,14 @@
         return new URL(path, window.location.href).href;
     }
 
+    function getCleanCurrentUrl() {
+        const url = new URL(window.location.href);
+        const id = new URLSearchParams(window.location.search).get('id');
+        url.search = id ? `?id=${encodeURIComponent(id)}` : '';
+        url.hash = '';
+        return url.href;
+    }
+
     function getProgramFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         const programId = parseInt(urlParams.get('id'), 10);
@@ -34,15 +42,19 @@
     }
 
     function updateMeta(program) {
+        const canonicalUrl = getCleanCurrentUrl();
         document.title = `${program.name} — Скачать бесплатно на KirDev Studio`;
 
         const metaDesc = document.querySelector('meta[name="description"]');
         if (metaDesc) metaDesc.setAttribute('content', program.description);
 
+        const canonical = document.getElementById('canonical-url');
+        if (canonical) canonical.setAttribute('href', canonicalUrl);
+
         setMeta('og-title', `${program.name} — Скачать бесплатно на KirDev Studio`);
         setMeta('og-desc', program.description);
         setMeta('og-img', toAbsoluteUrl(program.cover_image || '../static/images/hero_illustration.jpg'));
-        setMeta('og-url', window.location.href);
+        setMeta('og-url', canonicalUrl);
 
         const twitterTitle = document.querySelector('meta[name="twitter:title"]');
         const twitterDesc = document.querySelector('meta[name="twitter:description"]');
