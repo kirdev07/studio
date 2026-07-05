@@ -8,8 +8,10 @@
     "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
     "lint": "eslint \"static/js/**/*.js\" \"scripts/**/*.mjs\"",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "generate:program-pages": "node scripts/generate-program-pages.mjs",
+    "generate": "npm run generate:program-pages && npm run generate:sitemap",
     "test": "node scripts/validate-site.mjs",
-    "build": "npm run generate:sitemap && vite build",
+    "build": "npm run generate && vite build",
     "preview": "vite preview",
     "check": "npm run lint && npm test && npm run build"
   },
