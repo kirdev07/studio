@@ -10,9 +10,9 @@
     "check": "npm run format:check && npm run lint"
   },
   "devDependencies": {
-    "@eslint/js": "latest",
-    "eslint": "latest",
-    "globals": "latest",
-    "prettier": "latest"
+    "@eslint/js": "9.30.1",
+    "eslint": "9.30.1",
+    "globals": "16.3.0",
+    "prettier": "3.6.2"
   }
 }
