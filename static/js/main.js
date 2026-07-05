@@ -1,3 +1,17 @@
+// --- Monochrome Theme Override ---
+(function loadMonochromeTheme() {
+  const currentScript = document.currentScript;
+  const scriptUrl = currentScript?.src || new URL('static/js/main.js', window.location.href).href;
+  const themeUrl = new URL('../monochrome.css?v=1.0', scriptUrl).href;
+
+  if (document.querySelector(`link[href="${themeUrl}"]`)) return;
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = themeUrl;
+  document.head.appendChild(link);
+})();
+
 // --- Toast Notifications ---
 window.showToast = function (message, duration = 3000) {
   let container = document.getElementById('toast-container');
@@ -172,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Easter Egg Console Log ---
   console.log(
     '%c👋 Привет, разработчик!\n%cВижу, ты любишь заглядывать под капот.\nКирДев Студия — это хобби-проект, написанный с душой. Если есть идеи или просто хочешь пообщаться — заглядывай в наш Telegram!',
-    'color: #00ffcc; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(0,255,204,0.5);',
+    'color: #ffffff; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(255,255,255,0.25);',
     'color: #aaaaaa; font-size: 14px; margin-top: 10px;'
   );
 
