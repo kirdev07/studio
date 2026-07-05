@@ -6,6 +6,14 @@ const root = process.cwd();
 const htmlFiles = ['index.html', 'pages/programs.html', 'pages/program_detail.html', 'pages/404.html'];
 const requiredFiles = [
   'static/style.css',
+  'static/css/main.css',
+  'static/css/tokens.css',
+  'static/css/base.css',
+  'static/css/layout.css',
+  'static/css/components.css',
+  'static/css/pages.css',
+  'static/css/utilities.css',
+  'static/data/programs.json',
   'static/js/main.js',
   'static/js/programs.js',
   'static/js/catalog.js',
@@ -64,24 +72,9 @@ async function validateHtmlAssets(htmlFile) {
   }
 }
 
-async function validateProgramsData() {
-  const source = await readFile(path.join(root, 'static/js/programs.js'), 'utf8');
-  const match = source.match(/const PROGRAMS = (\[[\s\S]*?\n\]);/);
-  if (!match) {
-    fail('PROGRAMS array was not found in static/js/programs.js');
-    return;
-  }
-
-  let programs;
-  try {
-    programs = JSON.parse(match[1]);
-  } catch (error) {
-    fail(`PROGRAMS array is not valid JSON-like data: ${error.message}`);
-    return;
-  }
-
+function validateProgramList(programs, sourceName) {
   if (!Array.isArray(programs) || programs.length === 0) {
-    fail('PROGRAMS must be a non-empty array');
+    fail(`${sourceName} must be a non-empty array`);
     return;
   }
 
@@ -89,21 +82,49 @@ async function validateProgramsData() {
   for (const program of programs) {
     for (const field of ['id', 'name', 'description', 'full_description', 'version', 'link', 'cover_image', 'category']) {
       if (program[field] === undefined || program[field] === '') {
-        fail(`Program ${program.name || program.id || 'unknown'} is missing field: ${field}`);
+        fail(`${sourceName}: program ${program.name || program.id || 'unknown'} is missing field: ${field}`);
       }
     }
 
     if (ids.has(program.id)) {
-      fail(`Duplicate program id: ${program.id}`);
+      fail(`${sourceName}: duplicate program id: ${program.id}`);
     }
     ids.add(program.id);
 
     if (!Array.isArray(program.features) || program.features.length === 0) {
-      fail(`Program ${program.name} must have non-empty features array`);
+      fail(`${sourceName}: program ${program.name} must have non-empty features array`);
     }
 
     if (!Array.isArray(program.screenshots)) {
-      fail(`Program ${program.name} screenshots must be an array`);
+      fail(`${sourceName}: program ${program.name} screenshots must be an array`);
+    }
+  }
+}
+
+async function validateProgramsData() {
+  const jsonSource = await readFile(path.join(root, 'static/data/programs.json'), 'utf8');
+  let programsFromJson;
+
+  try {
+    programsFromJson = JSON.parse(jsonSource);
+  } catch (error) {
+    fail(`static/data/programs.json is invalid JSON: ${error.message}`);
+    return;
+  }
+
+  validateProgramList(programsFromJson, 'static/data/programs.json');
+
+  const jsSource = await readFile(path.join(root, 'static/js/programs.js'), 'utf8');
+  if (!jsSource.includes('static/data/programs.json')) {
+    fail('static/js/programs.js should reference static/data/programs.json as the external data source');
+  }
+}
+
+async function validateCssEntrypoint() {
+  const css = await readFile(path.join(root, 'static/css/main.css'), 'utf8');
+  for (const layer of ['tokens.css', 'base.css', 'layout.css', 'components.css', 'pages.css', 'utilities.css']) {
+    if (!css.includes(layer)) {
+      fail(`static/css/main.css does not import ${layer}`);
     }
   }
 }
@@ -119,6 +140,7 @@ for (const htmlFile of htmlFiles) {
 }
 
 await validateProgramsData();
+await validateCssEntrypoint();
 
 if (errors.length > 0) {
   console.error('\nStatic site validation failed:\n');
