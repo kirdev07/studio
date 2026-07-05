@@ -1,0 +1,10 @@
+/* Base HTML/body rules for future styles.
+   The legacy base rules are still loaded from ../style.css. */
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
