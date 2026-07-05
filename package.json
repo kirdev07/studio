@@ -6,8 +6,9 @@
   "scripts": {
     "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
     "format:check": "prettier --check \"**/*.{html,css,js,json,md}\"",
-    "lint": "eslint \"static/js/**/*.js\"",
-    "check": "npm run format:check && npm run lint"
+    "lint": "eslint \"static/js/**/*.js\" \"scripts/**/*.mjs\"",
+    "test": "node scripts/validate-site.mjs",
+    "check": "npm run format:check && npm run lint && npm test"
   },
   "devDependencies": {
     "@eslint/js": "9.30.1",
