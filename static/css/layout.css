@@ -1,0 +1,5 @@
+/* Layout-level styles for new sections and future page structure. */
+
+.container {
+  max-width: var(--site-max-width);
+}
