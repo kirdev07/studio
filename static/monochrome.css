@@ -5,33 +5,29 @@
   --accent: #ffffff !important;
   --accent-hover: #ffffff !important;
   --accent-soft: rgba(255, 255, 255, 0.06) !important;
-  --accent-border: rgba(255, 255, 255, 0.24) !important;
+  --accent-border: rgba(255, 255, 255, 0.28) !important;
   --bg-color: #000000 !important;
   --bg-primary: #111111 !important;
   --glass-bg: #0b0b0b !important;
   --btn-primary-bg: #151515 !important;
-  --text-primary: #f2f2f2 !important;
-  --text-secondary: #9a9a9a !important;
-  --border-color: rgba(255, 255, 255, 0.14) !important;
+  --text-primary: #ffffff !important;
+  --text-secondary: #c8c8c8 !important;
+  --border-color: rgba(255, 255, 255, 0.18) !important;
 }
 
 html,
 body {
   background: #000000 !important;
-  color: #f2f2f2 !important;
+  color: #ffffff !important;
   color-scheme: dark !important;
 }
 
-/* Safety net: if old CSS still contains green/blue values, make the rendered UI monochrome. */
-body {
-  filter: grayscale(1) !important;
-}
-
+/* Keep media monochrome without muting the whole interface. */
 img,
 video,
 canvas,
 iframe {
-  filter: grayscale(1) !important;
+  filter: grayscale(1) contrast(1.08) brightness(1.04) !important;
 }
 
 a,
@@ -40,6 +36,8 @@ a:active,
 .nav a,
 .nav a:hover,
 .nav a.active,
+.logo,
+.logo span,
 .hero-preview-eyebrow,
 .minimal-badge,
 .hero-preview-link,
@@ -67,9 +65,18 @@ a:active,
 .detail-title-main,
 .flush-title,
 .body-copy strong,
-.text-primary-inline {
-  color: #f2f2f2 !important;
-  -webkit-text-fill-color: #f2f2f2 !important;
+.text-primary-inline,
+h1,
+h2,
+h3,
+h4,
+button,
+.btn-primary,
+.btn-secondary,
+.stat-number,
+.detail-version {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
   background-image: none !important;
 }
 
@@ -86,7 +93,7 @@ a:hover,
 .glow-orb,
 .glow-orb.orb-2,
 .radial-layer {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.045) 0%, rgba(0, 0, 0, 0) 68%) !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.055) 0%, rgba(0, 0, 0, 0) 68%) !important;
 }
 
 .header,
@@ -124,8 +131,8 @@ a:hover,
 .select-wrapper,
 .latest-release-grid,
 .toast {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01)) !important;
-  border-color: rgba(255, 255, 255, 0.16) !important;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.012)) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
   box-shadow: none !important;
 }
 
@@ -145,8 +152,8 @@ a:hover,
 .repo-btn:hover,
 .share-btn:hover,
 .faq-trigger:hover {
-  background: rgba(255, 255, 255, 0.07) !important;
-  border-color: rgba(255, 255, 255, 0.34) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.42) !important;
   box-shadow: none !important;
 }
 
@@ -167,8 +174,8 @@ a:hover,
 .round-icon svg,
 .faq-trigger-icon svg,
 .logo svg {
-  color: #f2f2f2 !important;
-  stroke: #f2f2f2 !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
   fill: none !important;
 }
 
@@ -183,7 +190,7 @@ a:hover,
 .about-card::before,
 .stat-card::before,
 .faq-item::before {
-  background: rgba(255, 255, 255, 0.06) !important;
+  background: rgba(255, 255, 255, 0.075) !important;
 }
 
 .version-badge,
@@ -207,22 +214,22 @@ a:hover,
 .detail-subtitle,
 .faq-answer,
 .faq-answer p {
-  color: #a3a3a3 !important;
-  -webkit-text-fill-color: #a3a3a3 !important;
+  color: #c8c8c8 !important;
+  -webkit-text-fill-color: #c8c8c8 !important;
 }
 
 input,
 select,
 textarea {
-  color: #f2f2f2 !important;
+  color: #ffffff !important;
   background: #050505 !important;
-  border-color: rgba(255, 255, 255, 0.16) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
   caret-color: #ffffff !important;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #777777 !important;
+  color: #9a9a9a !important;
 }
 
 * {
@@ -230,11 +237,11 @@ textarea::placeholder {
 }
 
 *:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.72) !important;
+  outline: 2px solid rgba(255, 255, 255, 0.78) !important;
   outline-offset: 3px !important;
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.24) !important;
   color: #ffffff !important;
 }
