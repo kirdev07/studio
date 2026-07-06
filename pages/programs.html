@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разработки — KirDev Studio</title>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KirDev Studio - Надежный софт для ваших задач">
+    <meta name="twitter:description" content="Профессиональная разработка скриптов, ботов и программ для ПК и смартфонов от KirDev Studio.">
+    <meta name="twitter:image" content="https://kirdev07.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
+    <link rel="canonical" href="https://kirdev07.github.io/kirdev-studio.github.io/pages/programs.html">
+
+    <meta name="description" content="Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon_code-CRI9eivC.svg?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Программы — KirDev Studio">
+    <meta property="og:description" content="Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.">
+    <meta property="og:image" content="https://kirdev07.github.io/kirdev-studio.github.io/static/images/hero_illustration.jpg">
+    <meta property="og:url" content="https://kirdev07.github.io/kirdev-studio.github.io/pages/programs.html">
+    <meta property="og:site_name" content="KirDev Studio">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <link rel="manifest" href="../assets/manifest-Cj4ZoLWy.json">
+  <link rel="stylesheet" crossorigin href="../assets/main-B01TT6fd.css">
+</head>
+<body>
+    <div class="glow-orb" aria-hidden="true"></div>
+    <div class="glow-orb orb-2" aria-hidden="true"></div>
+
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo-wrapper">
+                <a href="../index.html" class="logo">KirDev <span>Studio</span></a>
+            </div>
+
+            <button class="menu-toggle" aria-label="Открыть меню" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="nav-links">
+                <a href="../index.html">Главная</a>
+                <a href="programs.html">Разработки</a>
+                <a href="https://t.me/kirdev_studio" target="_blank" rel="noopener noreferrer">Telegram</a>
+                <a href="https://vk.com/kirdev_07" target="_blank" rel="noopener noreferrer">VK</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="portfolio portfolio-page">
+            <div class="container">
+                <h2 class="section-title page-title-centered">Наши Разработки</h2>
+                <p class="page-intro">Выберите программу из списка ниже, чтобы узнать подробности, посмотреть скриншоты и скачать безопасную версию.</p>
+
+                <div class="catalog-controls">
+                    <div class="catalog-search-sort">
+                        <div class="catalog-search-field">
+                            <svg class="search-icon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="search-input" class="catalog-input" placeholder="Поиск программ...">
+                        </div>
+
+                        <div class="catalog-sort-group">
+                            <label for="sort-select" class="catalog-label">Сортировка:</label>
+                            <div class="catalog-select-wrapper">
+                                <select id="sort-select" class="catalog-select">
+                                    <option value="new">Сначала новые</option>
+                                    <option value="popular">Популярные</option>
+                                    <option value="az">От А до Я</option>
+                                </select>
+                                <svg class="select-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-container">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="Android">Android</button>
+                        <button class="filter-btn" data-filter="Боты">Боты</button>
+                        <button class="filter-btn" data-filter="Сайты">Сайты</button>
+                    </div>
+                </div>
+
+                <div id="empty-filter-msg" class="empty-filter">
+                    <svg class="empty-icon" aria-hidden="true" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="9" y1="9" x2="13" y2="13"></line><line x1="13" y1="9" x2="9" y2="13"></line></svg>
+                    <h3 class="empty-title">Разработки не найдены</h3>
+                    <p class="empty-copy">По вашему запросу ничего не нашлось. Попробуйте изменить параметры поиска или фильтры.</p>
+                    <button class="btn-secondary reset-btn" id="reset-filters-btn">Сбросить всё</button>
+                </div>
+
+                <div class="programs-grid" id="programs-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h2>KirDev Studio</h2>
+                    <p>Надежные и безопасные программы для ваших задач.</p>
+                </div>
+                <div class="footer-links">
+                    <p>&copy; 2026 KirDev Studio. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-to-top" aria-label="Наверх">
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <script src="../static/js/programs.js?v=2.3"></script>
+    <script src="../static/js/catalog.js?v=1.0"></script>
+    <script src="../static/js/main.js?v=1.1"></script>
+</body>
+</html>
