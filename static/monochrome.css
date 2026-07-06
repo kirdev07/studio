@@ -27,7 +27,7 @@ img,
 video,
 canvas,
 iframe {
-  filter: grayscale(1) contrast(1.08) brightness(1.04) !important;
+  filter: grayscale(1) contrast(1.08) brightness(0.9) !important;
 }
 
 a,
@@ -232,6 +232,115 @@ textarea::placeholder {
   color: #9a9a9a !important;
 }
 
+/* Design polish */
+.section-padding {
+  padding-top: 112px !important;
+  padding-bottom: 112px !important;
+}
+
+.hero {
+  padding-bottom: 118px !important;
+}
+
+.section-title,
+.detail-title-main,
+.hero-title-main {
+  letter-spacing: -0.045em !important;
+  line-height: 0.98 !important;
+}
+
+.page-intro,
+.hero-lead,
+.body-copy,
+.detail-description {
+  line-height: 1.78 !important;
+}
+
+.program-card,
+.minimal-release-card,
+.detail-hero-block,
+.detail-section,
+.feedback-banner,
+.about-card,
+.stat-card,
+.direction-card,
+.faq-item {
+  border-radius: 22px !important;
+}
+
+.program-card,
+.minimal-release-card {
+  padding: 24px !important;
+  gap: 18px !important;
+}
+
+.program-card-title,
+.minimal-title {
+  margin-bottom: 8px !important;
+}
+
+.program-card-description,
+.minimal-desc {
+  margin-top: 8px !important;
+  line-height: 1.65 !important;
+}
+
+.version-badge,
+.badge,
+.badge-new,
+.badge-popular,
+.meta-item {
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.045) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.detail-actions-wrapper,
+.hero-actions,
+.catalog-search-sort,
+.filter-container {
+  gap: 12px !important;
+}
+
+.download-btn,
+.detail-action-btn,
+.repo-btn,
+.share-btn,
+.btn-primary,
+.btn-secondary,
+.filter-btn {
+  min-height: 46px !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.screenshots-carousel,
+.carousel-slide,
+.generated-screenshots-grid,
+.hero-preview img,
+.screenshot-img,
+.minimal-image {
+  background: #050505 !important;
+  border-radius: 18px !important;
+}
+
+.screenshot-img,
+.hero-preview img,
+.minimal-image,
+.generated-screenshots-grid img {
+  opacity: 0.78 !important;
+}
+
+.screenshot-img:hover,
+.hero-preview img:hover,
+.minimal-image:hover,
+.generated-screenshots-grid img:hover {
+  opacity: 0.92 !important;
+}
+
 * {
   text-shadow: none !important;
 }
@@ -244,4 +353,69 @@ textarea::placeholder {
 ::selection {
   background: rgba(255, 255, 255, 0.24) !important;
   color: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .section-padding {
+    padding-top: 78px !important;
+    padding-bottom: 78px !important;
+  }
+
+  .hero {
+    padding-top: 136px !important;
+    padding-bottom: 82px !important;
+  }
+
+  .hero-actions,
+  .detail-actions-wrapper {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+  }
+
+  .download-btn,
+  .detail-action-btn,
+  .repo-btn,
+  .share-btn,
+  .btn-primary,
+  .btn-secondary {
+    width: 100% !important;
+    min-height: 48px !important;
+    padding: 13px 16px !important;
+  }
+
+  .program-card,
+  .minimal-release-card,
+  .detail-hero-block,
+  .detail-section,
+  .feedback-banner,
+  .about-card,
+  .stat-card,
+  .direction-card,
+  .faq-item {
+    border-radius: 18px !important;
+    padding: 20px !important;
+  }
+
+  .programs-grid,
+  .latest-release-grid,
+  .stats-grid,
+  .directions-grid {
+    gap: 18px !important;
+  }
+
+  .detail-meta,
+  .program-card-meta {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .screenshots-title {
+    margin-top: 42px !important;
+  }
 }
